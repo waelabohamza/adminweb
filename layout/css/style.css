@@ -1,0 +1,371 @@
+.navbar {
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+}
+
+
+/* Menu-top */
+
+.menu-top {
+    height: 40px;
+    background-color: #3498db;
+}
+
+
+/* Side Bar */
+
+.sidebar {
+    background-color: #23292F;
+    color: white;
+    height: 1000px;
+}
+
+.sidebar .listside {
+    margin-top: 20px !important;
+}
+
+.sidebar .listside li {
+    transition: all .5s ease-in-out;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.sidebar .listside a {
+    text-decoration: none;
+    color: white;
+}
+
+.sidebar .listside a:hover {
+    text-decoration: none;
+}
+
+.sidebar .listside li:hover {
+    background-color: #3498db;
+    color: white;
+}
+
+.sidebar .listside li span {
+    margin: 0px 10px 0px 0px;
+}
+
+.image_admin img {
+    width: 130px;
+    height: 130px;
+    margin-top: 20px;
+}
+
+.menu-top h3 {
+    margin: 6px 0px 0px 0px;
+    color: white;
+    font-weight: bold;
+}
+
+
+/* ==================================== */
+
+
+/*              Home Page               */
+
+
+/* ==================================== */
+
+.home .card {
+    cursor: pointer;
+    padding: 15px;
+}
+
+.home .one {
+    background-color: #e74c3c;
+}
+
+.home .two {
+    background-color: #27ae60;
+}
+
+.home .three {
+    background-color: #2980b9;
+}
+
+.home .four {
+    background-color: #16a085;
+}
+
+.home .card .icon {
+    font-size: 58px;
+    color: white;
+}
+
+.home .card h2 {
+    margin-top: 10px;
+    font-size: 30px;
+    color: white;
+}
+
+
+/* start modify nice select */
+
+.nice-select .list {
+    max-height: 120px;
+    overflow: auto;
+    border: 1px solid #aaa;
+}
+
+.nice-select .option:hover,
+.nice-select .option.focus,
+.nice-select .option.selected.focus {
+    background: #3498db;
+    color: #eee;
+    font-weight: bold;
+}
+
+.nice-select .option.selected.focus {
+    color: #000;
+}
+
+.nice-select {
+    height: 33px;
+    line-height: 32px;
+    padding-left: 13px;
+    border: 1px solid #aaa;
+}
+
+.pager-section {
+    background: #eee
+}
+
+
+/* start freamwork table */
+
+thead {
+    background: #23292F;
+    color: #eee;
+}
+
+
+/* start form search and choose class */
+
+.parent-search {
+    position: relative;
+}
+
+.parent-search input[type="text"] {
+    padding-left: 50px
+}
+
+.parent-search .btn {
+    position: absolute !important;
+    top: 0px;
+    left: 0px;
+    height: 30px;
+    line-height: .9px;
+    border-radius: 0px
+}
+
+
+/* start liblary nice select */
+
+.parent-search .nice-select {
+    height: 30px;
+    padding-left: 45px;
+    line-height: 28px
+}
+
+.parent-search .nice-select .option {
+    line-height: 30px;
+    min-height: 24px
+}
+
+
+/* start freamwork panel */
+
+.panel-custom {
+    margin-top: 20px
+}
+
+.panel-custom .panel-heading {
+    background: #23292F;
+    color: #eee;
+}
+
+.panel-custom .panel-heading .panel-title {
+    font-size: 14px;
+    font-weight: 400
+}
+
+.panel-view {
+    margin-top: 20px
+}
+
+.panel-view .panel-heading {
+    background: #3498db
+}
+
+.panel-view .panel-heading img {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+}
+
+.panel-view .ul-view li {
+    padding: 5px;
+    color: #777;
+    font-family: "time new roman";
+    letter-spacing: 1px;
+    text-transform: capitalize;
+}
+
+.btn-mar {
+    margin-top: 50px
+}
+
+.m-b {
+    margin-bottom: 10px
+}
+
+
+/* ==================================== */
+
+
+/*          My    FreamWork             */
+
+
+/* ==================================== */
+
+.mg-15 {
+    margin: 15px;
+}
+
+.pg-15 {
+    padding: 15px;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+    color: inherit;
+}
+
+
+/****** CODE ******/
+
+.file-upload {
+    display: block;
+    text-align: center;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 12px;
+}
+
+.file-upload .file-select {
+    display: block;
+    border: 2px solid #dce4ec;
+    color: #34495e;
+    cursor: pointer;
+    height: 40px;
+    line-height: 40px;
+    text-align: left;
+    background: #FFFFFF;
+    overflow: hidden;
+    position: relative;
+}
+
+.file-upload .file-select .file-select-button {
+    background: #dce4ec;
+    padding: 0 10px;
+    display: inline-block;
+    height: 40px;
+    line-height: 40px;
+}
+
+.file-upload .file-select .file-select-name {
+    line-height: 40px;
+    display: inline-block;
+    padding: 0 10px;
+}
+
+.file-upload .file-select:hover {
+    border-color: #34495e;
+    transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    -webkit-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+}
+
+.file-upload .file-select:hover .file-select-button {
+    background: #34495e;
+    color: #FFFFFF;
+    transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    -webkit-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+}
+
+.file-upload.active .file-select {
+    border-color: #3fa46a;
+    transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    -webkit-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+}
+
+.file-upload.active .file-select .file-select-button {
+    background: #3fa46a;
+    color: #FFFFFF;
+    transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    -webkit-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+}
+
+.file-upload .file-select input[type=file] {
+    z-index: 100;
+    cursor: pointer;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    filter: alpha(opacity=0);
+}
+
+.file-upload .file-select.file-select-disabled {
+    opacity: 0.65;
+}
+
+.file-upload .file-select.file-select-disabled:hover {
+    cursor: default;
+    display: block;
+    border: 2px solid #dce4ec;
+    color: #34495e;
+    cursor: pointer;
+    height: 40px;
+    line-height: 40px;
+    margin-top: 5px;
+    text-align: left;
+    background: #FFFFFF;
+    overflow: hidden;
+    position: relative;
+}
+
+.file-upload .file-select.file-select-disabled:hover .file-select-button {
+    background: #dce4ec;
+    color: #666666;
+    padding: 0 10px;
+    display: inline-block;
+    height: 40px;
+    line-height: 40px;
+}
+
+.file-upload .file-select.file-select-disabled:hover .file-select-name {
+    line-height: 40px;
+    display: inline-block;
+    padding: 0 10px;
+}
+
+
+/* End File Uplaod  */
