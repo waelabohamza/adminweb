@@ -14,7 +14,6 @@ if ($count > 0 ) {
     ) ;
     sendEmail($email , "Verfiy Code" , " Code = '$code' ") ; 
     updateData("users" , $datapass , "users_email  = '$email' ");
-
     echo json_encode(array("status"=> "success" , "code" => $code  )) ;
 
 }else {
