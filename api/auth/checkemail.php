@@ -12,7 +12,7 @@ if ($count > 0 ) {
     $datapass = array(
         "users_verfiy" => $code 
     ) ;
-    
+    sendEmail($email , "Verfiy Code" , " Code = '$code' ") ; 
     updateData("users" , $datapass , "users_email  = '$email' ");
 
     echo json_encode(array("status"=> "success" , "code" => $code  )) ;
