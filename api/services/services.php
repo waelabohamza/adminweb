@@ -1,6 +1,6 @@
 <?php
 include "../../connect.php";
-$table = "users";
+$table = "servciesview";
 
 $limit = paginationLimit($_GET['page'] ?? null , 10); 
 
