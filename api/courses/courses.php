@@ -2,7 +2,7 @@
 
 include "../../connect.php";
 
-$table = "courses";
+$table = "coursesview";
 
 $limit = paginationLimit($_GET['page'] ?? null, 10);
 
