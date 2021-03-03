@@ -1,8 +1,11 @@
 <?php
 include "../../connect.php";
 $table = "users";
+
 $limit = paginationLimit($_GET['page'] ?? null, 10);
+
 $data = getAllData($table, "1 = 1  $limit ");
+
 $count = $data['count'];
 
 $values = $data['values'];
