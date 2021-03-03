@@ -1,5 +1,7 @@
 <?php
+
 include "../../connect.php";
+
 $table = "users";
 
 $limit = paginationLimit($_GET['page'] ?? null, 10);
