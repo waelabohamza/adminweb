@@ -121,6 +121,15 @@ function paginationLimit($getpage, $countrow)
     return $limit;
 }
 
+function createJson($count, $values)
+{
+    if ($count > 0) {
+        echo json_encode($values);
+    } else {
+        zeroCount();
+    }
+}
+
 // ===========================
 
 function countCoulmn($column, $table, $where = null, $val)

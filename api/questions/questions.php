@@ -1,9 +1,7 @@
 <?php
 include "../../connect.php";
-$table = "categories";
-
-$limit = paginationLimit($_GET['page'] ?? null , 10); 
-
+$table = "questions";
+$limit = paginationLimit($_GET['page'] ?? null, 10);
 $data = getAllData($table, "1 = 1  $limit ");
 $count = $data['count'] ; 
 
