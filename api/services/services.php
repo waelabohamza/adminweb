@@ -14,7 +14,7 @@ if (isset($_POST['id'])) {
 
     $and = "AND services_categories = '$id' ";
 
-    $and = "AND  services_name like %'$search'% " ; 
+    $and .= "AND  services_name like '%$search%' " ; 
 
 }
 
