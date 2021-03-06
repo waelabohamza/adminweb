@@ -42,7 +42,7 @@ if ($data['count'] > 0) {
 }
 
 
-$data = getAllData("categories", "1 = 1 LIMIT 5 ");
+$data = getAllData("categories", "1 = 1");
 
 if ($data['count'] > 0) {
 

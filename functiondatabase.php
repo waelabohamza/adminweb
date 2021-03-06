@@ -183,7 +183,7 @@ function deleteFile($filedir, $imageold)
 
 function zeroCount()
 {
-    echo json_encode(array("status" => "falid"));
+    echo json_encode(array(0 => "falid"));
 }
 
 
