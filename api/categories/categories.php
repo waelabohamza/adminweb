@@ -4,6 +4,9 @@ include "../../connect.php";
 
 $table = "categories";
 
+
+
+
 $limit = paginationLimit($_GET['page'] ?? null , 10000); 
 
 $data = getAllData($table, "1 = 1  $limit ");

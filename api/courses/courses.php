@@ -6,6 +6,8 @@ $table = "coursesview";
 
 $limit = paginationLimit($_GET['page'] ?? null, 10);
 
+$and = null  ; 
+
 if (isset($_POST['id'])) {
 
     $search = $_POST['search'] ; 
