@@ -16,7 +16,7 @@ if (isset($_POST['id'])) {
 
     $and = "AND courses_type = '$id' ";
 
-    $and .= "AND  courses_name like '%$search%' " ; 
+    $and .= "AND ( courses_name like '%$search%' OR  courses_name_ar like '%$search%' )" ; 
 
 }
 

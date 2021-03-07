@@ -49,6 +49,22 @@ if ($data['count'] > 0) {
    $arraydatahome['categories'] = $data['values'];
 }
 
+$data = getAllData("catcourses", "1 = 1");
+
+if ($data['count'] > 0) {
+
+   $arraydatahome['catcourses'] = $data['values'];
+}
+
+
+$data = getAllData("catexperts", "1 = 1");
+
+if ($data['count'] > 0) {
+
+   $arraydatahome['catexperts'] = $data['values'];
+}
+
+
 
 
 // echo "<pre>" ; 
