@@ -40,13 +40,13 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         "orderscourse_phone"    => $phone,
         "orderscourse_email"    => $email,
         "orderscourse_image"    => $imagename,
-        "orderscourse_status"   => $status,
+        "orderscourse_status"   => 1,
         "orderscourse_userid"   => $userid,
         "orderscourse_courseid" => $courseid,
-        "orderscourse_back"     => $courseback
+        "orderscourse_back"     => $courseback  
     );
 
-    if (empty($msgerrors)) {
+    if (empty($msgerrors)){
 
         $countinsert  = insertData($table, $values);
 
@@ -58,8 +58,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
         echo json_encode(array("status" => "file Not Image"));
     }
+
 } else {
 
     echo json_encode(array("status" => "Hacker"));
-    
+
 }
