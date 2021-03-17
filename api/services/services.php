@@ -6,7 +6,7 @@ $table = "servciesview";
 
 $and = null;
 
-if (isset($_POST['id'])) {
+if (isset($_POST['id'])) {  // For  Search Services in page ( services  ) in app  
 
     $search = $_POST['search'] ; 
 
@@ -15,6 +15,14 @@ if (isset($_POST['id'])) {
     $and = "AND services_categories = '$id' ";
 
     $and .= "AND  services_name like '%$search%' " ; 
+
+}
+
+if (isset($_POST['search'])) {  // For  Search Services in page ( services  ) in app  
+
+    $search = $_POST['search'] ; 
+
+    $and = "AND  services_name like '%$search%' " ; 
 
 }
 
