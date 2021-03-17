@@ -19,8 +19,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     $address    = superFilter($_POST['address']);
 
-    $userid     = superFilter($_POST['fees']);
-
     $serviceid  = superFilter($_POST['serviceid']);
 
     $userid  = superFilter($_POST['userid']);
@@ -52,14 +50,10 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $imagenametwo =  rand(0, 1000000) . "_" . $imagetwo['name'];
     } else {
 
-        $imagetwo    = "0";
+        $imagenametwo    = "0";
     }
-
     // End Image Request 
-
-
     $values = array(
-
         "ordersservice_aganist"     => $against,
         "ordersservice_username"    => $userid,
         "ordersservice_email"       => $email,
@@ -68,30 +62,20 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         "ordersservice_fees"        => $fees,
         "ordersservice_licence"     => $imagenametwo,
         "ordersservice_identity"    => $imagename,
-        "ordersservice_serviceid"   => $serviceid , 
-        "ordersservice_userid"      => $userid 
+        "ordersservice_serviceid"   => $serviceid,
+        "ordersservice_userid"      => $userid
 
     );
-
     if (empty($msgerrors)) {
-
         $countinsert  = insertData($table, $values);
-
         move_uploaded_file($filetmp, "../upload/" . $filedir . "/" . $imagename);
-
-        if (isset($_FILES['filetwo']['name'])){
-
+        if (isset($_FILES['filetwo']['name'])) {
             move_uploaded_file($filetmptwo, "../upload/" . $filedir . "/" . $imagenametwo);
-
         }
-
         countresault($countinsert);
-
     } else {
-
         echo json_encode(array("status" => "file Not Image"));
     }
 } else {
-
     echo json_encode(array("status" => "Hacker"));
 }
