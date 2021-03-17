@@ -41,6 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
             $values = array(
                 "users_name" => $username,
+                "users_phone" => $phone,
                 "users_email" => $email,
                 "users_password" => $password,
                 "users_verfiy" => $verfiycode
