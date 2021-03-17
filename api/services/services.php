@@ -4,7 +4,10 @@ include "../../connect.php";
 
 $table = "servciesview";
 
-$and = null;
+$and = null ;
+
+$limit = paginationLimit($_GET['page'] ?? null, 1000);
+
 
 if (isset($_POST['id'])) {  // For  Search Services in page ( services  ) in app  
 
@@ -17,18 +20,9 @@ if (isset($_POST['id'])) {  // For  Search Services in page ( services  ) in app
     $and .= "AND  services_name like '%$search%' " ; 
 
 }
-
-if (isset($_POST['search'])) {  // For  Search Services in page ( services  ) in app  
-
-    $search = $_POST['search'] ; 
-
-    $and = "AND  services_name like '%$search%' " ; 
-
-}
+ 
 
 
-
-$limit = paginationLimit($_GET['page'] ?? null, 10);
 
 $data = getAllData($table, "1 = 1  $and  $limit");
 
