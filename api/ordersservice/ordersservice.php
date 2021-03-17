@@ -1,13 +1,12 @@
 <?php 
 
-
 include "../../connect.php";
 
 $table = "ordersserviceview";
 
 $and = null;
 
-$userid = $_POST['userid'] ;  
+$userid = $_GET['userid'] ;  
  
 $limit = paginationLimit($_GET['page'] ?? null, 100);
 

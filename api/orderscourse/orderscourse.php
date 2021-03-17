@@ -6,7 +6,7 @@ $table = "orderscourseview";
 
 $and = null;
 
-$userid = $_POST['userid'] ;  
+$userid = $_GET['userid'] ;  
  
 $limit = paginationLimit($_GET['page'] ?? null, 10);
 
