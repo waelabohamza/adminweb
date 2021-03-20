@@ -111,19 +111,19 @@
 
                                 <td>
                                     <a href="users.php?do=edit&stdid=<?php   //echo $user['std_id']  
-                                                                        ?>" class="btn-primary btn-sm <?php //echo $user['std_section']; 
-                                                                                                        ?>">Edit</a>
+                                                                        ?>" class="btn-primary btn-sm mg-h-5 <?php //echo $user['std_section']; 
+                                                                                                                ?>"> <i class="fa fa-edit"> </i> <span class="hidden-xs">Edit</span> </a>
 
 
                                     <a href="users.php?do=delete&stdid=<?php //echo  $user['std_id'] 
-                                                                        ?>" class="btn-danger btn-sm <?php //echo $user['std_section']; 
-                                                                                                        ?>">delete</a>
+                                                                        ?>" class="btn-danger btn-sm mg-h-5 <?php //echo $user['std_section']; 
+                                                                                                            ?>"><i class="fa fa-remove"> </i> <span class="hidden-xs">Delete</span> </a>
 
                                     <?php if ($user['users_approve'] == "0") {  ?>
 
                                         <a href="users.php?do=delete&stdid=<?php //echo  $user['std_id'] 
-                                                                            ?>" class="btn-info btn-sm <?php //echo $user['std_section']; 
-                                                                ?>">Approve</a>
+                                                                            ?>" class="btn-info btn-sm mg-h-5 <?php //echo $user['std_section']; 
+                                                                                                                ?>"><i class="fa fa-check"></i> <span class="hidden-xs">Approve</span> </a>
                                     <?php } ?>
                                 </td>
                             </tr>

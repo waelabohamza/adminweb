@@ -249,6 +249,10 @@ thead {
     padding: 15px;
 }
 
+.mg-h-5 {
+    margin: 0px 5px;
+}
+
 a {
     text-decoration: none;
 }

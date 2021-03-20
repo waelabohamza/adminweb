@@ -1,5 +1,5 @@
-<?php 
-ob_start() ; 
+<?php
+ob_start();
 include "../../ini.php";  ?>
 <?php include "../../include/header.php"; ?>
 <?php include "../../include/navmobile.php";   ?>
@@ -147,6 +147,9 @@ include "../../ini.php";  ?>
 
                         checkLength("phone",  $phone, 2, 100);
 
+                        $role    = superFilter($_POST['role']);
+
+
 
                         $data = getData("users", "users_email",  $email);
 
@@ -171,21 +174,22 @@ include "../../ini.php";  ?>
                                     "users_name" => $username,
                                     "users_phone" => $phone,
                                     "users_email" => $email,
-                                    "users_password" => $password
+                                    "users_password" => $password , 
+                                    "users_approve" => "1" , 
+                                    "users_role"  => $role
                                 );
                                 $countinsert  = insertData($table, $values);
                                 if ($countinsert > 0) {
 
             ?>
-                           <div class="alert alert-success"> Add Users Success </div>
+                    <div class="alert alert-success"> Add Users Success </div>
 
-                           
+
 
                 <?php
 
-                header("Location:users.php") ;
-                exit() ;  
-
+                                    header("Location:users.php");
+                                    exit();
                                 } else {
                                     echo json_encode(array("status" => "faild", "cause" => "Insert Faild", "key" => "insert"));
                                 }
@@ -210,7 +214,7 @@ include "../../ini.php";  ?>
             }
 ?>
 
-<?php include "../../include/footer.php"; 
+<?php include "../../include/footer.php";
 
-ob_flush() ; 
+ob_flush();
 ?>
