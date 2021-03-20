@@ -35,21 +35,21 @@
 
             <div class="panel panel-default panel-custom manage">
                 <div class="panel-heading">
-                    <h3 class="panel-title"> Categories </h3>
+                    <h3 class="panel-title"> Users </h3>
                 </div>
                 <div class="panel-body">
                     <div class="row m-b">
                         <div class="col-xs-12 col-sm-12 ">
-                            <a href="addcategories.php" class="btn btn-success btn-sm">+ Add users</a>
+                            <a href="addusers.php" class="btn btn-success btn-sm">+ Add users</a>
                         </div>
                     </div>
                     <div class="clearfix"></div>
 
                     <!-- start pager -->
                     <ul class="nav nav-tabs m-b pager-section">
-                        <li class="active"><a href="">All users</a>     </li>
-                        <li>               <a href="" >wait approve</a> </li>
-                        <li>               <a href=""  >approved</a>    </li>
+                        <li class="active"><a href="" data-target="all" class="all">All users</a> </li>
+                        <li> <a href="" data-target="wait">wait approve</a> </li>
+                        <li> <a href="" data-target="approved">approved</a> </li>
                     </ul>
                     <!-- End pager -->
 
@@ -61,12 +61,12 @@
                             </div>
                             <div class="col-xs-12 col-sm-6 col-md-8 col-lg-9">
                                 <?php
-                                // if (!isset($_GET['searchclass']) && !isset($_GET['searchstd'])) {
-                                //     echo '<a href="print/print-all-user.php" class="print-button">print excel</a>';
-                                // }
-                                // if (isset($_GET['searchclass'])) {
-                                //     echo '<a href="print/print-class-user.php?stdclass=' . $searchclass . '" class="print-button">print excel</a>';
-                                // }
+                                if (isset($_GET['searchstd'])) {
+                                    $get = $_GET['searchstd'];
+                                    $and = "And users_name  LIKE  '%$get%' ";
+                                } else {
+                                    $and = null;
+                                };
                                 ?>
                             </div>
                         </div>
@@ -74,7 +74,7 @@
                     </form>
                     <div class="clearfix"></div>
                     <!-- End pager  -->
-                    <table class="table  table-bordered table-hover table-responsive table-user">
+                    <table class="table  table-bordered table-hover table-responsive table-section">
                         <thead>
                             <tr>
                                 <td>name</td>
@@ -86,38 +86,45 @@
                         </thead>
 
                         <?php
-                        $users = getAllData("users", "users_role != 1")['values'];
+                        $users = getAllData("users", "users_role != 1 $and")['values'];
 
 
                         foreach ($users as $user) {
                         ?>
-
                             <tr>
                                 <td class=" "><?php echo $user['users_name']
                                                 ?></td>
-                                <td class="hidden-xs <?php //echo  $user['std_section']; 
+                                <td class="hidden-xs <?php if ($user['users_approve'] == 1) {
+                                                            echo "approved";
+                                                        } else {
+                                                            echo "wait";
+                                                        };
                                                         ?>"><?php echo $user['users_phone']
                                                             ?></td>
-                                <td class="hidden-xs <?php //echo  $user['std_section']; 
+                                <td class="hidden-xs <?php if ($user['users_approve'] == 1) {
+                                                            echo "approved";
+                                                        } else {
+                                                            echo "wait";
+                                                        };
                                                         ?>"><?php echo $user['users_email']
                                                             ?></td>
 
                                 <td>
                                     <a href="users.php?do=edit&stdid=<?php   //echo $user['std_id']  
-                                                                        ?>" class="btn-success btn-sm <?php //echo $user['std_section']; 
-                                                                                                        ?>">Edit</a>
-                                    <a href="users.php?do=view&stdid=<?php  // echo $user['std_id'] 
                                                                         ?>" class="btn-primary btn-sm <?php //echo $user['std_section']; 
-                                                                                                        ?>">view</a>
+                                                                                                        ?>">Edit</a>
+
+
+                                    <a href="users.php?do=delete&stdid=<?php //echo  $user['std_id'] 
+                                                                        ?>" class="btn-danger btn-sm <?php //echo $user['std_section']; 
+                                                                                                        ?>">delete</a>
+
                                     <?php if ($user['users_approve'] == "0") {  ?>
 
                                         <a href="users.php?do=delete&stdid=<?php //echo  $user['std_id'] 
                                                                             ?>" class="btn-info btn-sm <?php //echo $user['std_section']; 
-                                                                                                        ?>">Approve</a>
+                                                                ?>">Approve</a>
                                     <?php } ?>
-                                    <a href="users.php?do=delete&stdid=<?php //echo  $user['std_id'] 
-                                                                        ?>" class="btn-danger btn-sm <?php //echo $user['std_section']; 
-                                                                                                        ?>">delete</a>
                                 </td>
                             </tr>
 

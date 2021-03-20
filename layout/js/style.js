@@ -25,11 +25,11 @@ $(document).ready(function() {
         $(this).parent("li").siblings("li").removeClass("active");
         $(this).parent("li").addClass("active");
 
-        $(".table-student tr td").parent("tr").hide();
+        $(".table-section tr td").parent("tr").hide();
 
-        $(".table-student tr td").eq(0).parent("tr").show();
+        $(".table-section tr td").eq(0).parent("tr").show();
 
-        $(".table-student tr ." + target).each(function() {
+        $(".table-section tr ." + target).each(function() {
 
             $(this).parent("tr").show();
 
@@ -43,10 +43,10 @@ $(document).ready(function() {
 
     });
 
-    $(".pager-section li .all-student").click(function() {
+    $(".pager-section li .all").click(function() {
 
 
-        $(".table-student tr td").parent("tr").show();
+        $(".table-section tr td").parent("tr").show();
 
 
         return false;
