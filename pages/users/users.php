@@ -86,7 +86,7 @@
                         </thead>
 
                         <?php
-                        $users = getAllData("users", "users_role != 1 $and")['values'];
+                        $users = getAllData("users", "users_role != 1 $and ORDER BY users_id DESC")['values'];
 
 
                         foreach ($users as $user) {
