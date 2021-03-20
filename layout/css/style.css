@@ -4,6 +4,14 @@
     border-radius: 0;
 }
 
+a:hover {
+    color: inherit;
+}
+
+a {
+    color: inherit;
+}
+
 
 /* Menu-top */
 

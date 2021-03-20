@@ -18,7 +18,7 @@
     <!-- Start SideBar And Body Page -->
 
     <div class="row">
-    
+
         <!-- Start SideBar  -->
         <div class="col-md-4 col-lg-2 hidden-xs hidden-sm sidebar">
 
@@ -76,27 +76,14 @@
 
                     <ul class="nav nav-tabs m-b pager-section">
 
-                        <li role="presentation" class="active"><a href="" class="all-student">All Students</a></li>
+                        <li role="presentation" class="active"><a href="" class="all-category">All categories</a></li>
 
-                        <?php
 
-                        // if (isset($_GET['searchclass'])) {
-
-                        //     $sectionspager =  getThing("*", "section", "WHERE section_class = $searchclass ");
-
-                        //     foreach ($sectionspager as $sectionpager) {
-
-                        ?>
 
                         <li role="presentation"><a href="" data-target="<?php //echo $sectionpager['section_id'];  
                                                                         ?>"><?php //echo $sectionpager['section_name']; 
-                                                                                                                        ?> </a></li>
+                                                                            ?> </a></li>
 
-                        <?php
-
-                        // }
-                        // } 
-                        ?>
                     </ul>
                     <div class="clearfix"></div>
                     <form action="<?= $_SERVER['PHP_SELF']; ?> " method="get" class="parent-search m-b">
@@ -107,10 +94,10 @@
                             <div class="col-xs-12 col-sm-6 col-md-8 col-lg-9">
                                 <?php
                                 // if (!isset($_GET['searchclass']) && !isset($_GET['searchstd'])) {
-                                //     echo '<a href="print/print-all-student.php" class="print-button">print excel</a>';
+                                //     echo '<a href="print/print-all-category.php" class="print-button">print excel</a>';
                                 // }
                                 // if (isset($_GET['searchclass'])) {
-                                //     echo '<a href="print/print-class-student.php?stdclass=' . $searchclass . '" class="print-button">print excel</a>';
+                                //     echo '<a href="print/print-class-category.php?stdclass=' . $searchclass . '" class="print-button">print excel</a>';
                                 // }
                                 ?>
                             </div>
@@ -119,7 +106,7 @@
                     </form>
                     <div class="clearfix"></div>
                     <!-- End pager  -->
-                    <table class="table  table-bordered table-hover table-responsive table-student">
+                    <table class="table  table-bordered table-hover table-responsive table-category">
                         <thead>
                             <tr>
                                 <td>name</td>
@@ -131,51 +118,41 @@
                         </thead>
 
                         <?php
-                        // $students = getThing("*" , "students") ;
+                        $categories = getAllData("categories", "1 = 1")['values'];
 
-                        // $stmt = $con->prepare(
-                        //     "SELECT students.* , class.class_name 
-                        //                   FROM students 
-                        //                   INNER JOIN class  
-                        //                   ON students.std_class = class.class_id
-                        //                   " .
-                        //         $where . $whereclass
-                        // );
-                        // $stmt->execute();
-                        // $students = $stmt->fetchAll();
-                        // foreach ($students as $student) {
+
+                        foreach ($categories as $category) {
                         ?>
 
-                        <tr>
-                            <td class="<?php //echo  $student['std_section']; 
-                                        ?>"><?php // echo $student['std_name']  
-                                                                                    ?></td>
-                            <td class="hidden-xs <?php //echo  $student['std_section']; 
-                                                    ?>"><?php // echo $student['std_email'] 
-                                                                                            ?></td>
-                            <td class="hidden-xs <?php //echo  $student['std_section']; 
-                                                    ?>"><?php //echo $student['std_phone'] 
-                                                                                            ?></td>
-                            <td class="hidden-xs <?php //echo  $student['std_section']; 
-                                                    ?>"><?php //echo $student['class_name'] 
-                                                                                            ?></td>
-                            <td>
-                                <a href="students.php?do=edit&stdid=<?php   //echo $student['std_id']  
-                                                                    ?>" class="btn-info btn-sm <?php //echo $student['std_section']; 
-                                                                                                                                    ?>">Edit</a>
-                                <a href="students.php?do=view&stdid=<?php  // echo $student['std_id'] 
-                                                                    ?>" class="btn-primary btn-sm <?php //echo $student['std_section']; 
-                                                                                                                                    ?>">view</a>
-                                <a href="students.php?do=delete&stdid=<?php //echo  $student['std_id'] 
-                                                                        ?>" class="btn-danger btn-sm <?php //echo $student['std_section']; 
-                                                                                                                                    ?>">delete</a>
-                            </td>
-                        </tr>
+                            <tr>
+                                <td class=" "><?php echo $category['categories_name']
+                                                ?></td>
+                                <td class="hidden-xs <?php //echo  $category['std_section']; 
+                                                        ?>"><?php echo $category['categories']
+                                                        ?></td>
+                                <td class="hidden-xs <?php //echo  $category['std_section']; 
+                                                        ?>"><?php //echo $category['std_phone'] 
+                                                        ?></td>
+                                <td class="hidden-xs <?php //echo  $category['std_section']; 
+                                                        ?>"><?php //echo $category['class_name'] 
+                                                        ?></td>
+                                <td>
+                                    <a href="categorys.php?do=edit&stdid=<?php   //echo $category['std_id']  
+                                                                            ?>" class="btn-info btn-sm <?php //echo $category['std_section']; 
+                                                                                                ?>">Edit</a>
+                                    <a href="categorys.php?do=view&stdid=<?php  // echo $category['std_id'] 
+                                                                            ?>" class="btn-primary btn-sm <?php //echo $category['std_section']; 
+                                                                                                    ?>">view</a>
+                                    <a href="categorys.php?do=delete&stdid=<?php //echo  $category['std_id'] 
+                                                                            ?>" class="btn-danger btn-sm <?php //echo $category['std_section']; 
+                                                                                                        ?>">delete</a>
+                                </td>
+                            </tr>
 
 
 
                         <?php
-                        // } 
+                        }
                         ?>
                     </table>
                 </div>
