@@ -47,9 +47,9 @@
 
                     <!-- start pager -->
                     <ul class="nav nav-tabs m-b pager-section">
-                        <li role="presentation" class="active"><a href="" class="all-user">All users</a></li>
-                        <li role="presentation"  ><a href="" class="all-user">wait approve</a></li>
-                        <li role="presentation"  ><a href="" class="all-user">approved</a></li>
+                        <li class="active"><a href="">All users</a>     </li>
+                        <li>               <a href="" >wait approve</a> </li>
+                        <li>               <a href=""  >approved</a>    </li>
                     </ul>
                     <!-- End pager -->
 

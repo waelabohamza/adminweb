@@ -77,9 +77,6 @@
                     <ul class="nav nav-tabs m-b pager-section">
 
                         <li role="presentation" class="active"><a href="" class="all-category">All categories</a></li>
-
-
-
                         <li role="presentation"><a href="" data-target="<?php //echo $sectionpager['section_id'];  
                                                                         ?>"><?php //echo $sectionpager['section_name']; 
                                                                             ?> </a></li>
