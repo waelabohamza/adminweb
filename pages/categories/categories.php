@@ -2,15 +2,15 @@
 <?php include "../../include/header.php"; ?>
 <?php include "../../include/navmobile.php";   ?>
 
-<?php 
+<?php
 
 // Var Global For Every Page 
 
-$titlepage          = "Categories"                 ; 
-$linkaddpage        = "addcategories.php"          ;  
-$titleaddpage       = "Add Categories"             ; 
-$linkeditpage       = "editcategories.php"         ;
-$linkdeletepage     = "deletecategories.php"       ;
+$titlepage          = "Categories";
+$linkaddpage        = "addcategories.php";
+$titleaddpage       = "Add Categories";
+$linkeditpage       = "editcategories.php";
+$linkdeletepage     = "deletecategories.php";
 
 
 
@@ -51,12 +51,12 @@ $linkdeletepage     = "deletecategories.php"       ;
 
             <div class="panel panel-default panel-custom manage">
                 <div class="panel-heading">
-                    <h3 class="panel-title"><?php echo $titlepage ;?></h3>
+                    <h3 class="panel-title"><?php echo $titlepage; ?></h3>
                 </div>
                 <div class="panel-body">
                     <div class="row m-b">
                         <div class="col-xs-6 col-sm-9 ">
-                            <a href="<?=$linkaddpage ?>" class="btn btn-success btn-sm">+ <?php echo $titleaddpage ;   ?></a>
+                            <a href="<?= $linkaddpage ?>" class="btn btn-success btn-sm">+ <?php echo $titleaddpage;   ?></a>
                         </div>
                         <!-- Start Choose Select -->
                         <!-- <div class="col-xs-6 col-sm-3 col-pull-right">
@@ -65,18 +65,18 @@ $linkdeletepage     = "deletecategories.php"       ;
 
                                 <select name="searchclass" class="niceselect wide">
                                     <option value="0">choose class</option> -->
-                                    <?php
-                                    // foreach ($classsearch as $stdclass) {
-                                    //     echo "<option value='" . $stdclass['class_id'] . "'";
+                        <?php
+                        // foreach ($classsearch as $stdclass) {
+                        //     echo "<option value='" . $stdclass['class_id'] . "'";
 
-                                    //     if ((isset($_GET['searchclass']) && $_GET['searchclass'] == $stdclass['class_id']) || (isset($_SESSION['searchclass']) && $_SESSION['searchclass'] == $stdclass['class_id'])) {
+                        //     if ((isset($_GET['searchclass']) && $_GET['searchclass'] == $stdclass['class_id']) || (isset($_SESSION['searchclass']) && $_SESSION['searchclass'] == $stdclass['class_id'])) {
 
-                                    //         echo "selected";
-                                    //     }
-                                    //     echo ">" .  $stdclass['class_name'] . "</option>";
-                                    // }
-                                    ?>
-                                <!-- </select>
+                        //         echo "selected";
+                        //     }
+                        //     echo ">" .  $stdclass['class_name'] . "</option>";
+                        // }
+                        ?>
+                        <!-- </select>
                                 <button type="submit" class="btn btn-danger"><i class="fa fa-search"></i></button>
 
                             </form>
@@ -120,7 +120,7 @@ $linkdeletepage     = "deletecategories.php"       ;
                             <tr>
                                 <td>name</td>
                                 <td class="hidden-xs">name ar</td>
-                               
+
 
                                 <td>control</td>
                             </tr>
@@ -128,8 +128,6 @@ $linkdeletepage     = "deletecategories.php"       ;
 
                         <?php
                         $categories = getAllData("categories", "1 = 1  $and ORDER BY categories_id DESC")['values'];
-
-
                         foreach ($categories as $category) {
                         ?>
                             <tr>
@@ -137,24 +135,15 @@ $linkdeletepage     = "deletecategories.php"       ;
                                                 ?></td>
                                 <td class="hidden-xs "><?php echo $category['categories_name_ar']
                                                         ?></td>
-                                 
-
                                 <td>
                                     <a href="<?= $linkeditpage ?>?do=edit&stdid=<?php   //echo $user['std_id']  
-                                                                        ?>" class="btn-primary btn-sm mg-h-5 <?php //echo $user['std_section']; 
+                                                                                ?>" class="btn-primary btn-sm mg-h-5 <?php //echo $user['std_section']; 
                                                                                                                 ?>"> <i class="fa fa-edit"> </i> <span class="hidden-xs">Edit</span> </a>
-
-
-                                    <a href="<?= $linkdeletepage ?>?userid=<?php echo  $user['users_id']
-                                                                    ?>" class="btn-danger btn-sm mg-h-5 <?php //echo $user['std_section']; 
+                                    <a href="<?= $linkdeletepage ?>?categoriesid=<?php echo  $category['categories_id']
+                                                                                    ?>" class="btn-danger btn-sm mg-h-5 <?php //echo $user['std_section']; 
                                                                                                         ?>"><i class="fa fa-remove"> </i> <span class="hidden-xs">Delete</span> </a>
-
-
                                 </td>
                             </tr>
-
-
-
                         <?php
                         }
                         ?>
