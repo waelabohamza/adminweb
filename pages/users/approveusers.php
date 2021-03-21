@@ -2,6 +2,22 @@
 <?php include "../../include/header.php"; ?>
 <?php include "../../include/navmobile.php";   ?>
 
+<?php
+
+
+
+$id = $_GET['userid'];
+$data = array("users_approve" => "1");
+$count =  updateData("users", $data, "users_id = '$id' ");
+if ($count > 0) {
+    header("Location:users.php");
+    exit();
+}
+
+
+
+?>
+
 
 <!-- Start Body  -->
 

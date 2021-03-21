@@ -35,12 +35,12 @@
 
             <div class="panel panel-default panel-custom manage">
                 <div class="panel-heading">
-                    <h3 class="panel-title"> Categories </h3>
+                    <h3 class="panel-title"> Users </h3>
                 </div>
                 <div class="panel-body">
                     <div class="row m-b">
                         <div class="col-xs-6 col-sm-9 ">
-                            <a href="addcategories.php" class="btn btn-success btn-sm">+ Add Categories</a>
+                            <a href="addusers.php" class="btn btn-success btn-sm">+ Add users</a>
                         </div>
                         <div class="col-xs-6 col-sm-3 col-pull-right">
 
@@ -73,15 +73,13 @@
                     <div class="clearfix"></div>
 
                     <!-- start pager -->
-
                     <ul class="nav nav-tabs m-b pager-section">
-
-                        <li role="presentation" class="active"><a href="" class="all-category">All categories</a></li>
-                        <li role="presentation"><a href="" data-target="<?php //echo $sectionpager['section_id'];  
-                                                                        ?>"><?php //echo $sectionpager['section_name']; 
-                                                                            ?> </a></li>
-
+                        <li class="active"><a href="" data-target="all" class="all">All users</a> </li>
+                        <li> <a href="" data-target="wait">wait approve</a> </li>
+                        <li> <a href="" data-target="approved">approved</a> </li>
                     </ul>
+                    <!-- End pager -->
+
                     <div class="clearfix"></div>
                     <form action="<?= $_SERVER['PHP_SELF']; ?> " method="get" class="parent-search m-b">
                         <div class="row">
@@ -90,12 +88,12 @@
                             </div>
                             <div class="col-xs-12 col-sm-6 col-md-8 col-lg-9">
                                 <?php
-                                // if (!isset($_GET['searchclass']) && !isset($_GET['searchstd'])) {
-                                //     echo '<a href="print/print-all-category.php" class="print-button">print excel</a>';
-                                // }
-                                // if (isset($_GET['searchclass'])) {
-                                //     echo '<a href="print/print-class-category.php?stdclass=' . $searchclass . '" class="print-button">print excel</a>';
-                                // }
+                                if (isset($_GET['searchstd'])) {
+                                    $get = $_GET['searchstd'];
+                                    $and = "And users_name  LIKE  '%$get%' ";
+                                } else {
+                                    $and = null;
+                                };
                                 ?>
                             </div>
                         </div>
@@ -103,46 +101,57 @@
                     </form>
                     <div class="clearfix"></div>
                     <!-- End pager  -->
-                    <table class="table  table-bordered table-hover table-responsive table-category">
+                    <table class="table  table-bordered table-hover table-responsive table-section">
                         <thead>
                             <tr>
                                 <td>name</td>
                                 <td class="hidden-xs">phone</td>
                                 <td class="hidden-xs">email</td>
-                                <td class="hidden-xs">Class</td>
+
                                 <td>control</td>
                             </tr>
                         </thead>
 
                         <?php
-                        $categories = getAllData("categories", "1 = 1")['values'];
+                        $users = getAllData("users", "users_role != 1 $and ORDER BY users_id DESC")['values'];
 
 
-                        foreach ($categories as $category) {
+                        foreach ($users as $user) {
                         ?>
-
                             <tr>
-                                <td class=" "><?php echo $category['categories_name']
+                                <td class=" "><?php echo $user['users_name']
                                                 ?></td>
-                                <td class="hidden-xs <?php //echo  $category['std_section']; 
-                                                        ?>"><?php echo $category['categories']
-                                                        ?></td>
-                                <td class="hidden-xs <?php //echo  $category['std_section']; 
-                                                        ?>"><?php //echo $category['std_phone'] 
-                                                        ?></td>
-                                <td class="hidden-xs <?php //echo  $category['std_section']; 
-                                                        ?>"><?php //echo $category['class_name'] 
-                                                        ?></td>
+                                <td class="hidden-xs <?php if ($user['users_approve'] == 1) {
+                                                            echo "approved";
+                                                        } else {
+                                                            echo "wait";
+                                                        };
+                                                        ?>"><?php echo $user['users_phone']
+                                                            ?></td>
+                                <td class="hidden-xs <?php if ($user['users_approve'] == 1) {
+                                                            echo "approved";
+                                                        } else {
+                                                            echo "wait";
+                                                        };
+                                                        ?>"><?php echo $user['users_email']
+                                                            ?></td>
+
                                 <td>
-                                    <a href="categorys.php?do=edit&stdid=<?php   //echo $category['std_id']  
-                                                                            ?>" class="btn-info btn-sm <?php //echo $category['std_section']; 
-                                                                                                ?>">Edit</a>
-                                    <a href="categorys.php?do=view&stdid=<?php  // echo $category['std_id'] 
-                                                                            ?>" class="btn-primary btn-sm <?php //echo $category['std_section']; 
-                                                                                                    ?>">view</a>
-                                    <a href="categorys.php?do=delete&stdid=<?php //echo  $category['std_id'] 
-                                                                            ?>" class="btn-danger btn-sm <?php //echo $category['std_section']; 
-                                                                                                        ?>">delete</a>
+                                    <a href="users.php?do=edit&stdid=<?php   //echo $user['std_id']  
+                                                                        ?>" class="btn-primary btn-sm mg-h-5 <?php //echo $user['std_section']; 
+                                                                                                                ?>"> <i class="fa fa-edit"> </i> <span class="hidden-xs">Edit</span> </a>
+
+
+                                    <a href="deleteusers.php?userid=<?php echo  $user['users_id']
+                                                                    ?>" class="btn-danger btn-sm mg-h-5 <?php //echo $user['std_section']; 
+                                                                                                        ?>"><i class="fa fa-remove"> </i> <span class="hidden-xs">Delete</span> </a>
+
+                                    <?php if ($user['users_approve'] == "0") {  ?>
+
+                                        <a href="approveusers.php?userid=<?php echo  $user['users_id']
+                                                                            ?>" class="btn-info btn-sm mg-h-5 <?php //echo $user['std_section']; 
+                                                                                                                ?>"><i class="fa fa-check"></i> <span class="hidden-xs">Approve</span> </a>
+                                    <?php } ?>
                                 </td>
                             </tr>
 

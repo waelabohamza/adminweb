@@ -1,6 +1,23 @@
-<?php include "../../ini.php";  ?>
+<?php
+ob_start() ; 
+include "../../ini.php";  ?>
 <?php include "../../include/header.php"; ?>
 <?php include "../../include/navmobile.php";   ?>
+
+<?php 
+
+
+ 
+   $id = $_GET['userid'] ; 
+   $count =  deleteData("users" , "users_id" , $id);
+   if ($count > 0 ) {
+              header("Location:users.php") ; 
+              exit() ; 
+   }
+   
+ 
+
+?>
 
 
 <!-- Start Body  -->
@@ -49,4 +66,7 @@
 
 
 
-<?php include "../../include/footer.php";  ?>
+<?php include "../../include/footer.php"; 
+ob_flush() ; 
+
+?>

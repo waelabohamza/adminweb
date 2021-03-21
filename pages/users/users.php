@@ -39,8 +39,35 @@
                 </div>
                 <div class="panel-body">
                     <div class="row m-b">
-                        <div class="col-xs-12 col-sm-12 ">
+                        <div class="col-xs-6 col-sm-9 ">
                             <a href="addusers.php" class="btn btn-success btn-sm">+ Add users</a>
+                        </div>
+                        <div class="col-xs-6 col-sm-3 col-pull-right">
+
+                            <form action="" method="get" class="parent-search m-b">
+
+                                <select name="searchclass" class="niceselect wide">
+                                    <option value="0">choose class</option>
+                                    <?php
+                                    // foreach ($classsearch as $stdclass) {
+                                    //     echo "<option value='" . $stdclass['class_id'] . "'";
+
+                                    //     if ((isset($_GET['searchclass']) && $_GET['searchclass'] == $stdclass['class_id']) || (isset($_SESSION['searchclass']) && $_SESSION['searchclass'] == $stdclass['class_id'])) {
+
+                                    //         echo "selected";
+                                    //     }
+                                    //     echo ">" .  $stdclass['class_name'] . "</option>";
+                                    // }
+                                    ?>
+                                </select>
+                                <button type="submit" class="btn btn-danger"><i class="fa fa-search"></i></button>
+
+                            </form>
+                            <div class="clearfix m-b"></div>
+
+
+
+
                         </div>
                     </div>
                     <div class="clearfix"></div>
@@ -115,13 +142,13 @@
                                                                                                                 ?>"> <i class="fa fa-edit"> </i> <span class="hidden-xs">Edit</span> </a>
 
 
-                                    <a href="users.php?do=delete&stdid=<?php //echo  $user['std_id'] 
-                                                                        ?>" class="btn-danger btn-sm mg-h-5 <?php //echo $user['std_section']; 
-                                                                                                            ?>"><i class="fa fa-remove"> </i> <span class="hidden-xs">Delete</span> </a>
+                                    <a href="deleteusers.php?userid=<?php echo  $user['users_id']
+                                                                    ?>" class="btn-danger btn-sm mg-h-5 <?php //echo $user['std_section']; 
+                                                                                                        ?>"><i class="fa fa-remove"> </i> <span class="hidden-xs">Delete</span> </a>
 
                                     <?php if ($user['users_approve'] == "0") {  ?>
 
-                                        <a href="users.php?do=delete&stdid=<?php //echo  $user['std_id'] 
+                                        <a href="approveusers.php?userid=<?php echo  $user['users_id']
                                                                             ?>" class="btn-info btn-sm mg-h-5 <?php //echo $user['std_section']; 
                                                                                                                 ?>"><i class="fa fa-check"></i> <span class="hidden-xs">Approve</span> </a>
                                     <?php } ?>
