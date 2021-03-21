@@ -128,82 +128,81 @@ include "../../ini.php";  ?>
 
                     $verfiycode = rand(10000, 99999);
 
-                    if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
-                        $username = superFilter($_POST['username']);
+                    $username = superFilter($_POST['username']);
 
-                        checkLength("username",  $username, 2, 100);
+                    checkLength("username",  $username, 2, 100);
 
-                        $password = sha1($_POST['password']);
+                    $password = sha1($_POST['password']);
 
-                        checkLength("password",  $password, 2, 100);
+                    checkLength("password",  $password, 2, 100);
 
-                        $email    = superFilter($_POST['email']);
+                    $email    = superFilter($_POST['email']);
 
-                        checkLength("email",  $email, 2, 100);
-
-
-                        $phone    = superFilter($_POST['phone']);
-
-                        checkLength("phone",  $phone, 2, 100);
-
-                        $role    = superFilter($_POST['role']);
+                    checkLength("email",  $email, 2, 100);
 
 
+                    $phone    = superFilter($_POST['phone']);
 
-                        $data = getData("users", "users_email",  $email);
+                    checkLength("phone",  $phone, 2, 100);
 
-                        $count = $data['count'];
+                    $role    = superFilter($_POST['role']);
 
-                        if ($count > 0) {
+
+
+                    $data = getData("users", "users_email",  $email);
+
+                    $count = $data['count'];
+
+                    if ($count > 0) {
 
 ?>
 
-            <div class="alert alert-warning">email Or phone already existst</div>
+        <div class="alert alert-warning">email Or phone already existst</div>
+
+
+        <?php
+
+                        // echo json_encode(array("status" => "faild", "cause" => "email Or phone already existst", "key" => "found"));
+
+                    } else {
+
+                        if (empty($msgerrors)) {
+
+                            $values = array(
+                                "users_name" => $username,
+                                "users_phone" => $phone,
+                                "users_email" => $email,
+                                "users_password" => $password,
+                                "users_approve" => "1",
+                                "users_role"  => $role
+                            );
+                            $countinsert  = insertData($table, $values);
+                            if ($countinsert > 0) {
+
+        ?>
+                <div class="alert alert-success"> Add Users Success </div>
+
 
 
             <?php
 
-                            // echo json_encode(array("status" => "faild", "cause" => "email Or phone already existst", "key" => "found"));
-
+                                header("Location:users.php");
+                                exit();
+                            } else {
+                                echo json_encode(array("status" => "faild", "cause" => "Insert Faild", "key" => "insert"));
+                            }
                         } else {
 
-                            if (empty($msgerrors)) {
-
-                                $values = array(
-                                    "users_name" => $username,
-                                    "users_phone" => $phone,
-                                    "users_email" => $email,
-                                    "users_password" => $password , 
-                                    "users_approve" => "1" , 
-                                    "users_role"  => $role
-                                );
-                                $countinsert  = insertData($table, $values);
-                                if ($countinsert > 0) {
-
+                            foreach ($msgerrors as $errors) {
             ?>
-                    <div class="alert alert-success"> Add Users Success </div>
-
-
-
-                <?php
-
-                                    header("Location:users.php");
-                                    exit();
-                                } else {
-                                    echo json_encode(array("status" => "faild", "cause" => "Insert Faild", "key" => "insert"));
-                                }
-                            } else {
-
-                                foreach ($msgerrors as $errors) {
-                ?>
-                    <div class="mg-15  alert alert-warning"><?php echo $errors;  ?></div>
+                <div class="mg-15  alert alert-warning"><?php echo $errors;  ?></div>
 <?php
-                                }
-                                // echo json_encode(array("status" => "faild", "cause" => $msgerrors, "key" => "insert"));
                             }
+                            // echo json_encode(array("status" => "faild", "cause" => $msgerrors, "key" => "insert"));
                         }
                     }
+
                     //    End Page Insert
                 } else {
                     echo "reuest Not post";

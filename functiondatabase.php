@@ -255,7 +255,7 @@ function image_data($imagerequset)
     $imagetype          = $_FILES[$imagerequset]['type'];
     $imagetmp           = $_FILES[$imagerequset]['tmp_name'];
     $imagesize          = $_FILES[$imagerequset]['size'];
-    $allowextention     = array("jpg", "png", "jpeg", "gif");
+    $allowextention     = array("jpg", "png", "jpeg", "gif"  , "pdf");
     $strtoarray         = explode(".", $imagename);
     $imageextentionone  = end($strtoarray);
     $imageextension     = strtolower($imageextentionone);

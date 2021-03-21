@@ -53,4 +53,40 @@ $(document).ready(function() {
 
     });
 
+
+    // Add Multi Price For Service 
+
+    var num = $("#numberprice").attr("value");
+    num = parseInt(num);
+
+
+    $("#addnewprice").click(function() {
+
+
+
+
+        var append = '<div class="form-group">';
+        append += ' <label for="name" class="col-sm-2 control-label">Price ' + num + '</label>';
+        append += ' <div class="col-sm-10">';
+        append += ' <input type="text" name="name' + num + '" class="form-control" id="name" placeholder="name">';
+        append += ' </div></div>';
+        append += ' <div class="form-group">';
+        append += ' <label for="fees" class="col-sm-2 control-label">Fees ' + num + '</label>';
+        append += ' <div class="col-sm-10"> ';
+        append += ' <input type="text" name="fees' + num + '" class="form-control" id="fees" placeholder="fees">';
+        append += ' </div></div>';
+
+        $("#numberprice").attr("value", num++);
+
+
+
+
+
+
+
+        $(".formpricefees").append(append);
+
+
+    });
+
 });

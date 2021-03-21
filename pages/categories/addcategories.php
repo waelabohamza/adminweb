@@ -114,80 +114,79 @@ include "../../ini.php";  ?>
 
           $verfiycode = rand(10000, 99999);
 
-          if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
-            $name = superFilter($_POST['name']);
+          $name = superFilter($_POST['name']);
 
-            checkLength("category name",  $name, 2, 50);
+          checkLength("category name",  $name, 2, 50);
 
-            $namear = $_POST['namear'];
+          $namear = $_POST['namear'];
 
-            checkLength("category name arabic",  $namear, 2, 50);
+          checkLength("category name arabic",  $namear, 2, 50);
 
-            $desc    = superFilter($_POST['desc']);
+          $desc    = superFilter($_POST['desc']);
 
-            checkLength("description",  $desc, 10, 250);
+          checkLength("description",  $desc, 10, 250);
 
-            $descar    = superFilter($_POST['descar']);
+          $descar    = superFilter($_POST['descar']);
 
-            checkLength("description",  $descar, 10, 250);
+          checkLength("description",  $descar, 10, 250);
 
- 
-            $data = getData("categories", "categories_name",  $name);
 
-            $count = $data['count'];
+          $data = getData("categories", "categories_name",  $name);
 
-            if ($count > 0) {
+          $count = $data['count'];
+
+          if ($count > 0) {
 
 ?>
 
-      <div class="alert alert-warning"> category already existst</div>
+    <div class="alert alert-warning"> category already existst</div>
+
+
+    <?php
+
+            // echo json_encode(array("status" => "faild", "cause" => "email Or phone already existst", "key" => "found"));
+
+          } else {
+
+            if (empty($msgerrors)) {
+
+              $values = array(
+                "categories_name" => $name,
+                "categories_name_ar" => $namear,
+                "categories_desc" => $desc,
+                "categories_desc_ar" => $descar
+              );
+              $countinsert  = insertData($table, $values);
+              if ($countinsert > 0) {
+
+    ?>
+        <div class="alert alert-success"> Add Category Success </div>
+
 
 
       <?php
 
-              // echo json_encode(array("status" => "faild", "cause" => "email Or phone already existst", "key" => "found"));
-
+                header("Location:categories.php");
+                exit();
+              } else {
+      ?>
+        <div class="alert alert-danger mg-15"> Insert Faild Try Again</div>
+      <?php
+              }
             } else {
 
-              if (empty($msgerrors)) {
-
-                $values = array(
-                  "categories_name" => $name,
-                  "categories_name_ar" => $namear,
-                  "categories_desc" => $desc,
-                  "categories_desc_ar" => $descar 
-                );
-                $countinsert  = insertData($table, $values);
-                if ($countinsert > 0) {
-
+              foreach ($msgerrors as $errors) {
       ?>
-          <div class="alert alert-success"> Add Category Success </div>
-
-
-
-        <?php
-
-                  header("Location:categories.php");
-                  exit();
-                } else {
-                 ?>
-                   <div class="alert alert-danger mg-15"> Insert Faild Try Again</div>
-                 <?php 
-                }
-              } else {
-
-                foreach ($msgerrors as $errors) {
-        ?>
-          <div class="mg-15  alert alert-warning"><?php echo $errors;  ?></div>
+        <div class="mg-15  alert alert-warning"><?php echo $errors;  ?></div>
 <?php
-                }
-                // echo json_encode(array("status" => "faild", "cause" => $msgerrors, "key" => "insert"));
               }
+              // echo json_encode(array("status" => "faild", "cause" => $msgerrors, "key" => "insert"));
             }
           }
-          //    End Page Insert
-        } else {
+        }
+        //    End Page Insert
+        else {
           echo "reuest Not post";
         }
       } else {

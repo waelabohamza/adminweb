@@ -55,9 +55,13 @@ include "../../ini.php";  ?>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="description" class="col-sm-2 control-label">description</label>
-                                <div class="col-sm-10">
-                                    <input type="text" name="desc" class="form-control" id="description" placeholder="description">
+                                <label for="file" class="col-sm-2 control-label">Derscription</label>
+                                <div class=" file-upload col-sm-10">
+                                    <div class="file-select">
+                                        <div class="file-select-button" id="fileName">Choose File Pdf</div>
+                                        <div class="file-select-name" id="noFile">No File chosen...</div>
+                                        <input type="file" name="file" id="chooseFile" placeholder="image">
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -126,11 +130,13 @@ include "../../ini.php";  ?>
                             </div>
 
                             <div class="form-group">
-                                <label for="role" class="col-sm-2 control-label">Role</label>
+                                <label for="role" class="col-sm-2 control-label">Choose Category</label>
                                 <div class="col-sm-10">
-                                    <select class="niceselect wide" name="role">
-                                        <option value="0">User</option>
-                                        <option value="1">Admin</option>
+                                    <select class="niceselect wide" name="category">
+                                        <?php $categories = getAllData("categories", "1 = 1  $and ORDER BY categories_id DESC")['values'];
+                                        foreach ($categories as $category) { ?>
+                                            <option value="<?= $category['categories_id'] ?>"><?= $category['categories_name'] ?></option>
+                                        <?php } ?>
                                     </select>
                                 </div>
                             </div>
@@ -172,32 +178,55 @@ include "../../ini.php";  ?>
                 if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     //    Start Page Insert 
 
-                    $table = "categories";
+
+
+
+
+                    $table = "services";
 
                     $msgerrors = array();
 
+
                     $verfiycode = rand(10000, 99999);
 
-                    if ($_SERVER['REQUEST_METHOD'] == "POST") {
+                    
+
+                        if (isset($_FILES['file'])) {
+                            $image      = image_data("file");
+
+                            $filetmp   =  $image['tmp'];
+
+                            $imagename =  rand(0, 1000000) . "_" . $image['name'];
+                        } else {
+                            $msgerrors[] = "Please Choose Pdf File ";
+                        }
 
                         $name = superFilter($_POST['name']);
 
                         checkLength("category name",  $name, 2, 50);
 
-                        $namear = $_POST['namear'];
+                        $procedures = $_POST['procedures'];
 
-                        checkLength("category name arabic",  $namear, 2, 50);
+                        checkLength("procedures",  $procedures, 2, 200);
 
-                        $desc    = superFilter($_POST['desc']);
+                        // $desc    = superFilter($_POST['desc']);
 
-                        checkLength("description",  $desc, 10, 250);
+                        // checkLength("description",  $desc, 10, 250);
 
-                        $descar    = superFilter($_POST['descar']);
+                        $document    = superFilter($_POST['document']);
 
-                        checkLength("description",  $descar, 10, 250);
+                        checkLength("document",  $document, 10, 120);
+
+                        $common =  superFilter($_POST['common']);
+
+                        $favorite =  superFilter($_POST['favorite']);
+
+                        $price =  superFilter($_POST['price']);
+
+                        $categories = superFilter($_POST['category']);
 
 
-                        $data = getData("categories", "categories_name",  $name);
+                        $data = getData("services", "services_name",  $name);
 
                         $count = $data['count'];
 
@@ -205,7 +234,7 @@ include "../../ini.php";  ?>
 
 ?>
 
-            <div class="alert alert-warning"> category already existst</div>
+            <div class="alert alert-warning"> Services already existst</div>
 
 
             <?php
@@ -213,29 +242,36 @@ include "../../ini.php";  ?>
                             // echo json_encode(array("status" => "faild", "cause" => "email Or phone already existst", "key" => "found"));
 
                         } else {
-
                             if (empty($msgerrors)) {
-
                                 $values = array(
-                                    "categories_name" => $name,
-                                    "categories_name_ar" => $namear,
-                                    "categories_desc" => $desc,
-                                    "categories_desc_ar" => $descar
+                                    "services_name"         => $name,
+                                    "services_desc"         => $imagename,
+                                    "services_procedures"   => $procedures,
+                                    "services_document"     => $document,
+                                    "services_common"       => $common,
+                                    "services_favorite"     => $favorite,
+                                    "services_categories"   => $categories,
+                                    "services_typeprice"    => $price
                                 );
                                 $countinsert  = insertData($table, $values);
                                 if ($countinsert > 0) {
+                                    $filedir =  "pdfviewservices";
+                                    move_uploaded_file($filetmp, "../../api/upload/" . $filedir . "/" . $imagename);
 
             ?>
                     <div class="alert alert-success"> Add Category Success </div>
 
+                    <?php
 
-
-                <?php
-
-                                    header("Location:categories.php");
-                                    exit();
+                                    if ($price == "0") {
+                                        header("Location:services.php");
+                                        exit();
+                                    } else {
+                                        header("Location:addservicestwo.php");
+                                        exit();
+                                    }
                                 } else {
-                ?>
+                    ?>
                     <div class="alert alert-danger mg-15"> Insert Faild Try Again</div>
                 <?php
                                 }
@@ -249,7 +285,7 @@ include "../../ini.php";  ?>
                                 // echo json_encode(array("status" => "faild", "cause" => $msgerrors, "key" => "insert"));
                             }
                         }
-                    }
+                    
                     //    End Page Insert
                 } else {
                     echo "reuest Not post";
