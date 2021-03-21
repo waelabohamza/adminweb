@@ -136,12 +136,9 @@ $linkdeletepage     = "deletecategories.php";
                                 <td class="hidden-xs "><?php echo $category['categories_name_ar']
                                                         ?></td>
                                 <td>
-                                    <a href="<?= $linkeditpage ?>?do=edit&stdid=<?php   //echo $user['std_id']  
-                                                                                ?>" class="btn-primary btn-sm mg-h-5 <?php //echo $user['std_section']; 
-                                                                                                                ?>"> <i class="fa fa-edit"> </i> <span class="hidden-xs">Edit</span> </a>
+                                    <a href="<?= $linkeditpage ?>?categoriesid=<?= $category['categories_id'] ?>&category=<?php echo urlencode(serialize($category)) ; ?>" class="btn-primary btn-sm mg-h-5 "> <i class="fa fa-edit"> </i> <span class="hidden-xs">Edit</span> </a>
                                     <a href="<?= $linkdeletepage ?>?categoriesid=<?php echo  $category['categories_id']
-                                                                                    ?>" class="btn-danger btn-sm mg-h-5 <?php //echo $user['std_section']; 
-                                                                                                        ?>"><i class="fa fa-remove"> </i> <span class="hidden-xs">Delete</span> </a>
+                                                                                    ?>" class="btn-danger btn-sm mg-h-5 "><i class="fa fa-remove"> </i> <span class="hidden-xs">Delete</span> </a>
                                 </td>
                             </tr>
                         <?php

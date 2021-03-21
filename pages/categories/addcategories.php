@@ -171,7 +171,9 @@ include "../../ini.php";  ?>
                   header("Location:categories.php");
                   exit();
                 } else {
-                  echo json_encode(array("status" => "faild", "cause" => "Insert Faild", "key" => "insert"));
+                 ?>
+                   <div class="alert alert-danger mg-15"> Insert Faild Try Again</div>
+                 <?php 
                 }
               } else {
 
