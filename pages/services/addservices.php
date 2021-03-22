@@ -55,6 +55,12 @@ include "../../ini.php";  ?>
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label for="namear" class="col-sm-2 control-label">name arabic</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="namear" class="form-control" id="namear" placeholder="name arabic">
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label for="file" class="col-sm-2 control-label">Derscription</label>
                                 <div class=" file-upload col-sm-10">
                                     <div class="file-select">
@@ -71,9 +77,21 @@ include "../../ini.php";  ?>
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label for="proceduresar" class="col-sm-2 control-label">procedures arabic</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="proceduresar" class="form-control" id="proceduresar" placeholder="procedures arabic">
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label for="document" class="col-sm-2 control-label">document</label>
                                 <div class="col-sm-10">
                                     <input type="text" name="document" class="form-control" id="document" placeholder="document">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="documentar" class="col-sm-2 control-label">document arabic</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="documentar" class="form-control" id="documentar" placeholder="document arabic">
                                 </div>
                             </div>
 
@@ -189,103 +207,118 @@ include "../../ini.php";  ?>
 
                     $verfiycode = rand(10000, 99999);
 
-                    
-
-                        if (isset($_FILES['file'])) {
-                            $image      = image_data("file");
-
-                            $filetmp   =  $image['tmp'];
-
-                            $imagename =  rand(0, 1000000) . "_" . $image['name'];
-                        } else {
-                            $msgerrors[] = "Please Choose Pdf File ";
-                        }
-
-                        $name = superFilter($_POST['name']);
-
-                        checkLength("category name",  $name, 2, 50);
-
-                        $procedures = $_POST['procedures'];
-
-                        checkLength("procedures",  $procedures, 2, 200);
-
-                        // $desc    = superFilter($_POST['desc']);
-
-                        // checkLength("description",  $desc, 10, 250);
-
-                        $document    = superFilter($_POST['document']);
-
-                        checkLength("document",  $document, 10, 120);
-
-                        $common =  superFilter($_POST['common']);
-
-                        $favorite =  superFilter($_POST['favorite']);
-
-                        $price =  superFilter($_POST['price']);
-
-                        $categories = superFilter($_POST['category']);
 
 
-                        $data = getData("services", "services_name",  $name);
+                    if (isset($_FILES['file'])) {
+                        $image      = image_data("file");
 
-                        $count = $data['count'];
+                        $filetmp   =  $image['tmp'];
 
-                        if ($count > 0) {
+                        $imagename =  rand(0, 1000000) . "_" . $image['name'];
+                    } else {
+                        $msgerrors[] = "Please Choose Pdf File ";
+                    }
+
+                    $name = superFilter($_POST['name']);
+
+                    checkLength("service name",  $name, 2, 50);
+
+                    $namear = superFilter($_POST['namear']);
+
+                    checkLength("service name arabic",  $namear, 2, 50);
+
+                    $procedures = $_POST['procedures'];
+
+                    checkLength("procedures",  $procedures, 2, 200);
+
+                    $proceduresar = $_POST['proceduresar'];
+
+                    checkLength("procedures arabic",  $proceduresar, 2, 200);
+
+                    // $desc    = superFilter($_POST['desc']);
+
+                    // checkLength("description",  $desc, 10, 250);
+
+                    $document    = superFilter($_POST['document']);
+
+                    checkLength("document",  $document, 10, 120);
+
+                    $documentar    = superFilter($_POST['documentar']);
+
+                    checkLength("document arabic ",  $documentar, 10, 120);
+
+                    $common =  superFilter($_POST['common']);
+
+                    $favorite =  superFilter($_POST['favorite']);
+
+                    $price =  superFilter($_POST['price']);
+
+                    $categories = superFilter($_POST['category']);
+
+
+                    $data = getData("services", "services_name",  $name);
+
+                    $count = $data['count'];
+
+                    if ($count > 0) {
 
 ?>
 
-            <div class="alert alert-warning"> Services already existst</div>
+        <div class="alert alert-warning"> Services already existst</div>
 
 
-            <?php
+        <?php
 
-                            // echo json_encode(array("status" => "faild", "cause" => "email Or phone already existst", "key" => "found"));
+                        // echo json_encode(array("status" => "faild", "cause" => "email Or phone already existst", "key" => "found"));
 
-                        } else {
-                            if (empty($msgerrors)) {
-                                $values = array(
-                                    "services_name"         => $name,
-                                    "services_desc"         => $imagename,
-                                    "services_procedures"   => $procedures,
-                                    "services_document"     => $document,
-                                    "services_common"       => $common,
-                                    "services_favorite"     => $favorite,
-                                    "services_categories"   => $categories,
-                                    "services_typeprice"    => $price
-                                );
-                                $countinsert  = insertData($table, $values);
-                                if ($countinsert > 0) {
-                                    $filedir =  "pdfviewservices";
-                                    move_uploaded_file($filetmp, "../../api/upload/" . $filedir . "/" . $imagename);
+                    } else {
+                        if (empty($msgerrors)) {
+                            $values = array(
+                                "services_name"         => $name,
+                                "services_name_ar"      => $namear,
+                                "services_desc"         => $imagename,
+                                "services_procedures"   => $procedures,
+                                "services_procedures_ar"=> $proceduresar,
+                                "services_document"     => $document,
+                                "services_document_ar"  => $documentar,
+                                "services_common"       => $common,
+                                "services_favorite"     => $favorite,
+                                "services_categories"   => $categories,
+                                "services_typeprice"    => $price
+                            );
+                            $countinsert  = insertData($table, $values);
+                            if ($countinsert > 0) {
+                                $filedir =  "pdfviewservices";
+                                move_uploaded_file($filetmp, "../../api/upload/" . $filedir . "/" . $imagename);
 
-            ?>
-                    <div class="alert alert-success"> Add Category Success </div>
+        ?>
+                <div class="alert alert-success"> Add Category Success </div>
 
-                    <?php
-
-                                    if ($price == "0") {
-                                        header("Location:services.php");
-                                        exit();
-                                    } else {
-                                        header("Location:addservicestwo.php");
-                                        exit();
-                                    }
-                                } else {
-                    ?>
-                    <div class="alert alert-danger mg-15"> Insert Faild Try Again</div>
                 <?php
+
+                                if ($price == "0") {
+                                    header("Location:services.php");
+                                    exit();
+                                } else {
+                                    header("Location:addservicestwo.php");
+                                    exit();
                                 }
                             } else {
-
-                                foreach ($msgerrors as $errors) {
                 ?>
-                    <div class="mg-15  alert alert-warning"><?php echo $errors;  ?></div>
-<?php
-                                }
-                                // echo json_encode(array("status" => "faild", "cause" => $msgerrors, "key" => "insert"));
+                <div class="alert alert-danger mg-15"> Insert Faild Try Again</div>
+            <?php
                             }
+                        } else {
+
+                            foreach ($msgerrors as $errors) {
+            ?>
+                <div class="mg-15  alert alert-warning"><?php echo $errors;  ?></div>
+<?php
+                            }
+                            // echo json_encode(array("status" => "faild", "cause" => $msgerrors, "key" => "insert"));
                         }
-                    
+                    }
+
                     //    End Page Insert
                 } else {
                     echo "reuest Not post";

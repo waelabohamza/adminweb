@@ -10,8 +10,17 @@ $titlepage          = "Services";
 $linkaddpage        = "addservices.php";
 $titleaddpage       = "Add Service";
 $linkeditpage       = "editservices.php";
-$linkdeletepage     = "deleteservice.php";
+$linkdeletepage     = "deleteservices.php";
 
+
+
+
+$currentpage = isset($_GET['pager']) && is_numeric($_GET['pager']) ? intval($_GET['pager'])  : 1;
+$countdrug  = countCoulmn("services_id", "services");
+$nextpage   = $currentpage + 1;
+$prevpage   = $currentpage - 1;
+$lastpage   = ceil($countdrug / $perpage);
+$startpage  = ($currentpage - 1) * $perpage;
 
 
 
@@ -88,7 +97,7 @@ $linkdeletepage     = "deleteservice.php";
 
                     <!-- start pager -->
                     <ul class="nav nav-tabs m-b pager-section">
-                        <li class="active"><a href="" data-target="all" class="all">All Categories</a> </li>
+                        <li class="active"><a href="" data-target="all" class="all">All Services</a> </li>
                         <!-- <li> <a href="" data-target="wait">wait approve</a> </li>
                         <li> <a href="" data-target="approved">approved</a> </li> -->
                     </ul>
@@ -126,7 +135,7 @@ $linkdeletepage     = "deleteservice.php";
                             </tr>
                         </thead>
                         <?php
-                        $services = getAllData("servciesview", "1 = 1  $and ORDER BY services_id DESC")['values'];
+                        $services = getAllData("servciesview", "1 = 1  $and ORDER BY services_id DESC  LIMIT $startpage,$perpage ")['values'];
                         foreach ($services as $service) {
                         ?>
                             <tr>
@@ -135,15 +144,33 @@ $linkdeletepage     = "deleteservice.php";
                                 <td class="hidden-xs "><?php echo $service['services_name']
                                                         ?></td>
                                 <td>
-                                    <a href="<?= $linkeditpage ?>?servicesid=<?= $service['services_id'] ?>&category=<?php echo urlencode(serialize($service)) ; ?>" class="btn-primary btn-sm mg-h-5 "> <i class="fa fa-edit"> </i> <span class="hidden-xs">Edit</span> </a>
+                                    <a href="<?= $linkeditpage ?>?servicesid=<?= $service['services_id'] ?>&category=<?php echo urlencode(serialize($service)); ?>" class="btn-primary btn-sm mg-h-5 "> <i class="fa fa-edit"> </i> <span class="hidden-xs">Edit</span> </a>
                                     <a href="<?= $linkdeletepage ?>?servicesid=<?php echo  $service['services_id']
-                                                                                    ?>" class="btn-danger btn-sm mg-h-5 "><i class="fa fa-remove"> </i> <span class="hidden-xs">Delete</span> </a>
+                                                                                ?>" class="btn-danger btn-sm mg-h-5 "><i class="fa fa-remove"> </i> <span class="hidden-xs">Delete</span> </a>
                                 </td>
                             </tr>
                         <?php
                         }
                         ?>
                     </table>
+                    <div class="my-pager">
+                        <a href="?pager=<?= $prevpage;  ?>" class="pager-style <?php if ($currentpage <= 1) {
+                                                                                    echo 'false-href disabled-pointer';
+                                                                                } ?>"><i class="fa  fa-step-backward" aria-hidden="true"></i></a>
+                        <a href="?pager=<?= $prevpage - 1;  ?>" class="pager-style <?php if ($currentpage <= 2) {
+                                                                                        echo 'false-href disabled-pointer';
+                                                                                    } ?>"><i class="fa   fa-fast-backward" aria-hidden="true"></i></a>
+                        <form style="display:inline" action="<?= $_SERVER['PHP_SELF'] ?>" method="GET">
+                            الصفحة <input type="text" name="pager" class="pagerajax-input" value="<?= $currentpage ?>" /> من <span><?php echo $lastpage; ?></span>
+                            <button class="pager-style"><i class="fa fa-refresh"></i></button>
+                        </form>
+                        <a href="?pager=<?= $nextpage + 1;  ?>" class="pager-style <?php if ($currentpage >= ($lastpage - 1)) {
+                                                                                        echo 'false-href disabled-pointer';
+                                                                                    } ?>"><i class="fa fa-fast-forward" aria-hidden="true"></i></a>
+                        <a href="?pager=<?= $nextpage;  ?>" class="pager-style <?php if ($currentpage >= $lastpage) {
+                                                                                    echo 'false-href disabled-pointer';
+                                                                                } ?>"><i class="fa fa-step-forward" aria-hidden="true"></i></a>
+                    </div>
                 </div>
             </div>
 

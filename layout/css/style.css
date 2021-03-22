@@ -232,6 +232,29 @@ thead {
     margin-bottom: 10px
 }
 
+.my-pager {
+    background: #efefef;
+    border: 1px solid #ddd;
+    padding: 7px
+}
+
+.my-pager .pager-style {
+    background: linear-gradient(#fff, #ddd);
+    padding: 3px;
+    width: 25px;
+    display: inline-block;
+    text-align: center;
+    border: 1px solid #ddd
+}
+
+.my-pager .pagerajax-input {
+    width: 40px
+}
+
+.my-pager .disabled-pointer {
+    cursor: not-allowed
+}
+
 
 /* ==================================== */
 

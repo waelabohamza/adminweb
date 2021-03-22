@@ -132,12 +132,12 @@ function createJson($count, $values)
 
 // ===========================
 
-function countCoulmn($column, $table, $where = null, $val)
+function countCoulmn($column, $table, $where = null)
 {
     global $con;
     $stmt = $con->prepare("SELECT COUNT($column) FROM $table 
     $where ");
-    $stmt->execute(array($val));
+    $stmt->execute();
     $countcolumn = $stmt->fetchColumn();
     return $countcolumn;
 }
