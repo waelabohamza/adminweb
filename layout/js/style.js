@@ -62,6 +62,7 @@ $(document).ready(function() {
 
     $("#addnewprice").click(function() {
 
+        $("#numberprice").attr("value", ++num);
 
 
 
@@ -76,7 +77,7 @@ $(document).ready(function() {
         append += ' <input type="text" name="fees' + num + '" class="form-control" id="fees" placeholder="fees">';
         append += ' </div></div>';
 
-        $("#numberprice").attr("value", num++);
+
 
 
 

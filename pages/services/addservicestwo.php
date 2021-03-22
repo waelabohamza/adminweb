@@ -48,7 +48,7 @@ include "../../ini.php";  ?>
                     <div class="panel-body">
 
                         <form enctype="multipart/form-data" autocomplete="off" class="form-horizontal addvalidate" action="<?php echo $_SERVER['PHP_SELF'] . '?do=insert'; ?>" method="post">
-                           <input type="hidden" id="numberprice" name="number" value="1">
+                            <input type="hidden" id="numberprice" name="number" value="0">
                             <div class="formpricefees">
                                 <div class="form-group">
                                     <label for="name" class="col-sm-2 control-label">Price</label>
@@ -59,24 +59,20 @@ include "../../ini.php";  ?>
                                 <div class="form-group">
                                     <label for="name" class="col-sm-2 control-label">Fees</label>
                                     <div class="col-sm-10">
-                                        <input type="text" name="name0" class="form-control" id="name" placeholder="name">
+                                        <input type="text" name="fees0" class="form-control" id="name" placeholder="name">
                                     </div>
                                 </div>
 
                             </div>
-
-                            <div class="btn btn-success" id="addnewprice"> Add </div>
-
-
-
-
-
-
-
-
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label"></label>
+                                <div class="col-sm-10">
+                                    <div class="btn btn-primary" id="addnewprice"> Add Price</div>
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <div class="col-sm-offset-2 col-sm-10">
-                                    <button type="submit" class="btn btn-success btn-sm"> <i class="fa fa-plus"></i> Add Service </button>
+                                    <button type="submit" class="btn btn-success btn-sm"> <i class="fa fa-plus"></i> Add List Price</button>
                                 </div>
                             </div>
                         </form>
@@ -110,41 +106,95 @@ include "../../ini.php";  ?>
                 if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     //    Start Page Insert 
 
+                    $serviceid = maxId("services_id", "services");
+
                     $table = "services";
 
                     $msgerrors = array();
 
-
                     $verfiycode = rand(10000, 99999);
 
-                   
-                       
-                        $number = $_POST['number'] ; 
-                         
-                        for($i = 0  ; $i <= $number ; $i++){
 
-                            $name = superFilter($_POST['name' . $i]);
+                    $number = $_POST['number'];
 
-                            checkLength("price " . $i,  $name . $i, 1, 20);
+                    $name  = array();
 
-                            $fees = superFilter($_POST['fees' . $i]);
+                    $fees = array();
 
-                            checkLength("fees " . $i ,  $name . $i, 1, 20);
+                    $insetcount  = array();
 
+                    for ($i = 0; $i <= $number; $i++) {
+
+                        $name[] = superFilter($_POST['name' . $i]);
+
+                        checkLength("price " . $i,  $name[$i], 1, 40);
+
+                        $fees[] = superFilter($_POST['fees' . $i]);
+
+                        checkLength("fees " . $i,  $name[$i], 1, 20);
+                    }
+
+                    if (empty($msgerrors)) {
+
+
+                        for ($i = 0; $i <= $number; $i++) {
+
+                            $data = array(
+                                "servicesprice_name" => $name[$i],
+                                "servicesprice_fees" => $fees[$i],
+                                "servicesprice_serviceid" => $serviceid
+                            );
+                            $insetcount[$i] = insertData("servicesprice", $data);
+
+                            if ($insetcount[$i] == 0) {
+
+                                $msgerrors[] = "Faild add " . $i;
+                            }
                         }
-                         
 
-               
- 
+                        if (empty($msgerrors)) {
 
-                      
+                            header("Location:services.php");
+                            exit();
+                        } else {
+
+                            foreach ($msgerrors as $error) {
+
+                                echo '<div class="alert alert-danger mg-15"> ' .  $error . ' </div>';
+                            }
+                        }
+                    } else {
+
+                        foreach ($msgerrors as $error) {
+
+                            echo '<div class="alert alert-danger mg-15"> ' .  $error . ' </div>';
+                        }
+                    }
+
+                    // echo "<pre>";
+                    // print_r($name);
+                    // print_r($msgerrors);
+                    // echo "</pre>";
 
 
-                     
- 
-                   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                     //    End Page Insert
-                }else {
+                } else {
                     echo "reuest Not post";
                 }
             } else {
