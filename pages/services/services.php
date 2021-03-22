@@ -113,7 +113,7 @@ $startpage  = ($currentpage - 1) * $perpage;
                                 <?php
                                 if (isset($_GET['search'])) {
                                     $get = $_GET['search'];
-                                    $and = "And (categories_name  LIKE  '%$get%') OR (categories_name_ar  LIKE  '%$get%') ";
+                                    $and = "And (services_name  LIKE  '%$get%') OR (services_name_ar  LIKE  '%$get%') ";
                                 } else {
                                     $and = null;
                                 };

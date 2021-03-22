@@ -90,4 +90,9 @@ $(document).ready(function() {
 
     });
 
+
+    $(".pagination .disabled a").click(function() {
+        return false;
+    });
+
 });
