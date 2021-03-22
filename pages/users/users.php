@@ -3,6 +3,19 @@
 <?php include "../../include/navmobile.php";   ?>
 
 
+<?php
+
+$currentpage = isset($_GET['pager']) && is_numeric($_GET['pager']) ? intval($_GET['pager'])  : 1;
+$countdrug  = countCoulmn("users_id", "users");
+$nextpage   = $currentpage + 1;
+$prevpage   = $currentpage - 1;
+$lastpage   = ceil($countdrug / $perpage);
+$startpage  = ($currentpage - 1) * $perpage;
+
+
+?>
+
+
 <!-- Start Body  -->
 
 <div class="container-fluid">
@@ -113,7 +126,7 @@
                         </thead>
 
                         <?php
-                        $users = getAllData("users", "users_role != 1 $and ORDER BY users_id DESC")['values'];
+                        $users = getAllData("users", "users_role != 1 $and ORDER BY users_id DESC LIMIT $startpage,$perpage ")['values'];
 
 
                         foreach ($users as $user) {
@@ -161,6 +174,7 @@
                         }
                         ?>
                     </table>
+                    <?php include "../../include/pager.php";  ?>
                 </div>
             </div>
 

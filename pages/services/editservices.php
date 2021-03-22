@@ -61,18 +61,19 @@ if (isset($_GET['service'])) {
 
 
                         <form enctype="multipart/form-data" autocomplete="off" class="form-horizontal addvalidate" action="<?php echo $_SERVER['PHP_SELF'] . '?do=update'; ?>" method="post">
-                            <input type="hidden" name="id" value="<?= $service['categories_id'] ?>">
-                           
+                            <input type="hidden" name="id" value="<?= $service['services_id'] ?>">
+                            <input type="hidden" name="fileold" value="<?= $service['services_desc'] ?>">
+
                             <div class="form-group">
                                 <label for="name" class="col-sm-2 control-label">name</label>
                                 <div class="col-sm-10">
-                                    <input type="text" name="name" class="form-control" id="name" placeholder="name">
+                                    <input type="text" name="name" class="form-control" id="name" placeholder="name" value="<?= $service['services_name'] ?>">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="namear" class="col-sm-2 control-label">name arabic</label>
                                 <div class="col-sm-10">
-                                    <input type="text" name="namear" class="form-control" id="namear" placeholder="name arabic">
+                                    <input type="text" name="namear" class="form-control" id="namear" placeholder="name arabic" value="<?= $service['services_name_ar'] ?>">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -81,32 +82,32 @@ if (isset($_GET['service'])) {
                                     <div class="file-select">
                                         <div class="file-select-button" id="fileName">Choose File Pdf</div>
                                         <div class="file-select-name" id="noFile">No File chosen...</div>
-                                        <input type="file" name="file" id="chooseFile" placeholder="image">
+                                        <input type="file" name="file" id="chooseFile" placeholder="file">
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="procedures" class="col-sm-2 control-label">procedures</label>
                                 <div class="col-sm-10">
-                                    <input type="text" name="procedures" class="form-control" id="procedures" placeholder="procedures">
+                                    <input type="text" name="procedures" class="form-control" id="procedures" placeholder="procedures" value="<?= $service['services_procedures'] ?>">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="proceduresar" class="col-sm-2 control-label">procedures arabic</label>
                                 <div class="col-sm-10">
-                                    <input type="text" name="proceduresar" class="form-control" id="proceduresar" placeholder="procedures arabic">
+                                    <input type="text" name="proceduresar" class="form-control" id="proceduresar" placeholder="procedures arabic" value="<?= $service['services_procedures_ar'] ?>">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="document" class="col-sm-2 control-label">document</label>
                                 <div class="col-sm-10">
-                                    <input type="text" name="document" class="form-control" id="document" placeholder="document">
+                                    <input type="text" name="document" class="form-control" id="document" placeholder="document" value="<?= $service['services_document'] ?>">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="documentar" class="col-sm-2 control-label">document arabic</label>
                                 <div class="col-sm-10">
-                                    <input type="text" name="documentar" class="form-control" id="documentar" placeholder="document arabic">
+                                    <input type="text" name="documentar" class="form-control" id="documentar" placeholder="document arabic" value="<?= $service['services_document_ar'] ?>">
                                 </div>
                             </div>
 
@@ -115,13 +116,13 @@ if (isset($_GET['service'])) {
                                 <div class="col-sm-10">
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="common" value="1">
+                                            <input type="radio" name="common" value="1" <?php if ($service['services_common'] == "1") echo "checked";   ?>>
                                             Yes
                                         </label>
                                     </div>
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="common" value="0" checked>
+                                            <input type="radio" name="common" value="0" <?php if ($service['services_common'] == "0") echo "checked";   ?>>
                                             No
                                         </label>
                                     </div>
@@ -132,16 +133,33 @@ if (isset($_GET['service'])) {
                                 <div class="col-sm-10">
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="favorite" value="1">
+                                            <input type="radio" name="favorite" value="1" <?php if ($service['services_favorite'] == "1") echo "checked";   ?>>
                                             Yes
                                         </label>
                                     </div>
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="favorite" value="0" checked>
+                                            <input type="radio" name="favorite" value="0" <?php if ($service['services_favorite'] == "0") echo "checked";   ?>>
                                             No
                                         </label>
                                     </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="role" class="col-sm-2 control-label">Choose Category</label>
+                                <div class="col-sm-10">
+                                    <select class="niceselect wide" name="category">
+                                        <?php $categories = getAllData("categories", "1 = 1  $and ORDER BY categories_id DESC")['values'];
+                                        foreach ($categories as $category) { ?>
+                                            <option value="<?= $category['categories_id'] ?>" <?php if ($service['services_categories'])  echo "selected" ;  ; ?>><?= $category['categories_name'] ?></option>
+                                        <?php } ?>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <button type="submit" class="btn btn-success btn-sm"> <i class="fa fa-plus"></i> Save Update </button>
                                 </div>
                             </div>
                         </form>
@@ -174,86 +192,145 @@ if (isset($_GET['service'])) {
 
                 if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     //    Start Page Insert 
+                         
+                    echo "<pre>" ; 
+                    print_r($_FILES);
+                    echo "</pre>" ; 
 
-                    $table = "categories";
+
+                    $filedir = "pdfviewservices"  ;
+                    
+                     
+                   
+                    $table = "services";
 
                     $msgerrors = array();
 
 
+                    $verfiycode = rand(10000, 99999);
 
-                    if ($_SERVER['REQUEST_METHOD'] == "POST") {
-
-                        $id = superFilter($_POST['id']);
-
-                        $name = superFilter($_POST['name']);
-
-                        checkLength("category name",  $name, 2, 50);
-
-                        $namear = $_POST['namear'];
-
-                        checkLength("category name arabic",  $namear, 2, 50);
-
-                        $desc    = superFilter($_POST['desc']);
-
-                        checkLength("description",  $desc, 10, 250);
-
-                        $descar    = superFilter($_POST['descar']);
-
-                        checkLength("description",  $descar, 10, 250);
+                    $fileold = superFilter($_POST['fileold']) ;  
 
 
-                        $data = getData("categories", "categories_id",  $id);
 
-                        $count = $data['count'];
+                    if (isset($_FILES['file']['name']) && $_FILES['file']['error'] != "4") {
 
-                        if ($count == 0) {
+                        $image      = image_data("file");
+
+                        $filetmp   =  $image['tmp'];
+
+                        $filename =  rand(0, 1000000) . "_" . $image['name'];
+
+                    } else {
+
+                        $filename  =   $fileold  ; 
+
+                    }
+
+                    $id = superFilter($_POST['id']);
+
+                    $name = superFilter($_POST['name']);
+
+                    checkLength("service name",  $name, 2, 50);
+
+                    $namear = superFilter($_POST['namear']);
+
+                    checkLength("service name arabic",  $namear, 2, 50);
+
+                    $procedures = $_POST['procedures'];
+
+                    checkLength("procedures",  $procedures, 2, 200);
+
+                    $proceduresar = $_POST['proceduresar'];
+
+                    checkLength("procedures arabic",  $proceduresar, 2, 200);
+
+                    // $desc    = superFilter($_POST['desc']);
+
+                    // checkLength("description",  $desc, 10, 250);
+
+                    $document    = superFilter($_POST['document']);
+
+                    checkLength("document",  $document, 10, 120);
+
+                    $documentar    = superFilter($_POST['documentar']);
+
+                    checkLength("document arabic ",  $documentar, 10, 120);
+
+                    $common =  superFilter($_POST['common']);
+
+                    $favorite =  superFilter($_POST['favorite']);
+
+                    $categories = superFilter($_POST['category']);
+
+
+                    $data = getData("services", "services_id",  $id);
+
+                    $count = $data['count'];
+
+                    if ($count == 0) {
 
 ?>
 
-            <div class="alert alert-warning"> category Not exsist</div>
+        <div class="alert alert-warning"> Service Not exsist</div>
+
+
+        <?php
+
+                        // echo json_encode(array("status" => "faild", "cause" => "email Or phone already existst", "key" => "found"));
+
+                    } else {
+
+                        if (empty($msgerrors)) {
+
+                            $values = array(
+                                "services_name"         => $name,
+                                "services_name_ar"      => $namear,
+                                "services_desc"         => $filename,
+                                "services_procedures"   => $procedures,
+                                "services_procedures_ar" => $proceduresar,
+                                "services_document"     => $document,
+                                "services_document_ar"  => $documentar,
+                                "services_common"       => $common,
+                                "services_favorite"     => $favorite,
+                                "services_categories"   => $categories,
+                                // "services_typeprice"    => $price
+                            );
+                             
+                            if (isset($_FILES['file']['name']) && $_FILES['file']['error'] != "4") {
+                                if (file_exists("../../api/upload/" . $filedir . "/" . $fileold)){
+                                    unlink("../../api/upload/" . $filedir . "/" . $fileold);
+                                }
+                                move_uploaded_file($filetmp, "../../api/upload/" . $filedir . "/" . $filename);
+                            }
+
+                            $countupdate = updateData($table, $values, "services_id = '$id' ");
+                            if ($countinsert > 0) {
+
+        ?>
+                <div class="alert alert-success"> Edit Category Success </div>
+
 
 
             <?php
 
-                            // echo json_encode(array("status" => "faild", "cause" => "email Or phone already existst", "key" => "found"));
-
+                                header("Location:services.php");
+                                exit();
+                            } else {
+                                header("Location:services.php");
+                                exit();
+                            }
                         } else {
 
-                            if (empty($msgerrors)) {
-
-                                $values = array(
-                                    "categories_name" => $name,
-                                    "categories_name_ar" => $namear,
-                                    "categories_desc" => $desc,
-                                    "categories_desc_ar" => $descar
-                                );
-                                $countupdate = updateData($table, $values, "categories_id = '$id' ");
-                                if ($countinsert > 0) {
-
-                                    ?>
-                                            <div class="alert alert-success"> Edit Category Success </div>
-
-
-
-                                        <?php
-
-                                    header("Location:categories.php");
-                                    exit();
-                                } else {
-                                    header("Location:categories.php");
-                                    exit();
-                                }
-                            } else {
-
-                                foreach ($msgerrors as $errors) {
-                ?>
-                    <div class="mg-15  alert alert-warning"><?php echo $errors;  ?></div>
+                            foreach ($msgerrors as $errors) {
+            ?>
+                <div class="mg-15  alert alert-warning"><?php echo $errors;  ?></div>
 <?php
-                                }
-                                // echo json_encode(array("status" => "faild", "cause" => $msgerrors, "key" => "insert"));
                             }
+                            // echo json_encode(array("status" => "faild", "cause" => $msgerrors, "key" => "insert"));
                         }
                     }
+
                     //    End Page Insert
                 } else {
                     echo "reuest Not post";

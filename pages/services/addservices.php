@@ -256,68 +256,54 @@ include "../../ini.php";  ?>
                     $categories = superFilter($_POST['category']);
 
 
-                    $data = getData("services", "services_name",  $name);
 
-                    $count = $data['count'];
 
-                    if ($count > 0) {
+                    if (empty($msgerrors)) {
+                        $values = array(
+                            "services_name"         => $name,
+                            "services_name_ar"      => $namear,
+                            "services_desc"         => $imagename,
+                            "services_procedures"   => $procedures,
+                            "services_procedures_ar" => $proceduresar,
+                            "services_document"     => $document,
+                            "services_document_ar"  => $documentar,
+                            "services_common"       => $common,
+                            "services_favorite"     => $favorite,
+                            "services_categories"   => $categories,
+                            "services_typeprice"    => $price
+                        );
+                        $countinsert  = insertData($table, $values);
+                        if ($countinsert > 0) {
+                            $filedir =  "pdfviewservices";
+                            move_uploaded_file($filetmp, "../../api/upload/" . $filedir . "/" . $imagename);
 
 ?>
+            <div class="alert alert-success"> Add Category Success </div>
 
-        <div class="alert alert-warning"> Services already existst</div>
-
-
-        <?php
-
-                        // echo json_encode(array("status" => "faild", "cause" => "email Or phone already existst", "key" => "found"));
-
-                    } else {
-                        if (empty($msgerrors)) {
-                            $values = array(
-                                "services_name"         => $name,
-                                "services_name_ar"      => $namear,
-                                "services_desc"         => $imagename,
-                                "services_procedures"   => $procedures,
-                                "services_procedures_ar"=> $proceduresar,
-                                "services_document"     => $document,
-                                "services_document_ar"  => $documentar,
-                                "services_common"       => $common,
-                                "services_favorite"     => $favorite,
-                                "services_categories"   => $categories,
-                                "services_typeprice"    => $price
-                            );
-                            $countinsert  = insertData($table, $values);
-                            if ($countinsert > 0) {
-                                $filedir =  "pdfviewservices";
-                                move_uploaded_file($filetmp, "../../api/upload/" . $filedir . "/" . $imagename);
-
-        ?>
-                <div class="alert alert-success"> Add Category Success </div>
-
-                <?php
-
-                                if ($price == "0") {
-                                    header("Location:services.php");
-                                    exit();
-                                } else {
-                                    header("Location:addservicestwo.php");
-                                    exit();
-                                }
-                            } else {
-                ?>
-                <div class="alert alert-danger mg-15"> Insert Faild Try Again</div>
             <?php
+
+                            if ($price == "0") {
+                                header("Location:services.php");
+                                exit();
+                            } else {
+                                header("Location:addservicestwo.php");
+                                exit();
                             }
                         } else {
-
-                            foreach ($msgerrors as $errors) {
             ?>
-                <div class="mg-15  alert alert-warning"><?php echo $errors;  ?></div>
-<?php
-                            }
-                            // echo json_encode(array("status" => "faild", "cause" => $msgerrors, "key" => "insert"));
+            <div class="alert alert-danger mg-15"> Insert Faild Try Again</div>
+        <?php
                         }
+                    } else {
+
+                        foreach ($msgerrors as $errors) {
+        ?>
+            <div class="mg-15  alert alert-warning"><?php echo $errors;  ?></div>
+<?php
+                        }
+                        // echo json_encode(array("status" => "faild", "cause" => $msgerrors, "key" => "insert"));
                     }
+
 
                     //    End Page Insert
                 } else {
