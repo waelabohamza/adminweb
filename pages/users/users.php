@@ -150,9 +150,9 @@ $startpage  = ($currentpage - 1) * $perpage;
                                                             ?></td>
 
                                 <td>
-                                    <a href="users.php?do=edit&stdid=<?php   //echo $user['std_id']  
+                                    <!-- <a href="users.php?do=edit&stdid=<?php   //echo $user['std_id']  
                                                                         ?>" class="btn-primary btn-sm mg-h-5 <?php //echo $user['std_section']; 
-                                                                                                                ?>"> <i class="fa fa-edit"> </i> <span class="hidden-xs">Edit</span> </a>
+                                                                                                                ?>"> <i class="fa fa-edit"> </i> <span class="hidden-xs">Edit</span> </a> -->
 
 
                                     <a href="deleteusers.php?userid=<?php echo  $user['users_id']
