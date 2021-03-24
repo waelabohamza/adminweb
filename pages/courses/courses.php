@@ -6,9 +6,9 @@
 
 // Var Global For Every Page 
 
-$titlepage          = "Courses Course";
+$titlepage          = "Add Courses";
 $linkaddpage        = "addcourses.php";
-$titleaddpage       = "Add Coueses";
+$titleaddpage       = "Add Courses";
 $linkeditpage       = "editcourses.php";
 $linkdeletepage     = "deletecourses.php";
 
@@ -59,7 +59,7 @@ $linkdeletepage     = "deletecourses.php";
 
                     <!-- start pager -->
                     <ul class="nav nav-tabs m-b pager-section">
-                        <li class="active"><a href="" data-target="all" class="all">All Categories</a> </li>
+                        <li class="active"><a href="" data-target="all" class="all">All Courses</a> </li>
                         <!-- <li> <a href="" data-target="wait">wait approve</a> </li>
                         <li> <a href="" data-target="approved">approved</a> </li> -->
                     </ul>
@@ -107,8 +107,8 @@ $linkdeletepage     = "deletecourses.php";
                                 <td class="hidden-xs "><?php echo $course['courses_name_ar']
                                                         ?></td>
                                 <td>
-                                    <a href="<?= $linkeditpage ?>?coursesid=<?= $course['catcourses_id'] ?>&catcoures=<?php echo urlencode(serialize($course)); ?>" class="btn-primary btn-sm mg-h-5 "> <i class="fa fa-edit"> </i> <span class="hidden-xs">Edit</span> </a>
-                                    <a href="<?= $linkdeletepage ?>?coursesid=<?php echo  $course['catcourses_id']
+                                    <a href="<?= $linkeditpage ?>?coursesid=<?= $course['courses_id'] ?>&catcoures=<?php echo urlencode(serialize($course)); ?>" class="btn-primary btn-sm mg-h-5 "> <i class="fa fa-edit"> </i> <span class="hidden-xs">Edit</span> </a>
+                                    <a href="<?= $linkdeletepage ?>?coursesid=<?php echo  $course['courses_id']
                                                                                     ?>" class="btn-danger btn-sm mg-h-5 "><i class="fa fa-remove"> </i> <span class="hidden-xs">Delete</span> </a>
                                 </td>
                             </tr>

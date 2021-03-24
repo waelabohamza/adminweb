@@ -43,7 +43,7 @@ include "../../ini.php";  ?>
 
                 <div class="panel panel-default panel-custom">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Add Courses Course</h3>
+                        <h3 class="panel-title">Add  Courses</h3>
                     </div>
                     <div class="panel-body">
 
@@ -60,7 +60,6 @@ include "../../ini.php";  ?>
                                     <input type="text" name="namear" class="form-control" id="namear" placeholder="namear">
                                 </div>
                             </div>
-
                             <div class="form-group">
                                 <label for="desc" class="col-sm-2 control-label">description </label>
                                 <div class="col-sm-10">
@@ -115,7 +114,7 @@ include "../../ini.php";  ?>
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-offset-2 col-sm-10">
-                                    <button type="submit" class="btn btn-success btn-sm"> <i class="fa fa-plus"></i> Add Category Course</button>
+                                    <button type="submit" class="btn btn-success btn-sm"> <i class="fa fa-plus"></i> Add Course</button>
                                 </div>
                             </div>
                         </form>
@@ -180,13 +179,16 @@ include "../../ini.php";  ?>
                     $hour = superFilter($_POST['hour']);
 
                     checkLength("hour ",  $hour, 1, 50);
-                    
+
+
 
                     $common =superFilter($_POST['common']);
 
+                    $category = superFilter($_POST['category']) ; 
 
 
-                    $data = getData("catcourses", "catcourses_name",  $name);
+
+                    $data = getData("courses", "courses_name",  $name);
 
                     $count = $data['count'];
 
@@ -194,7 +196,7 @@ include "../../ini.php";  ?>
 
 ?>
 
-        <div class="alert alert-warning"> category already existst</div>
+        <div class="alert alert-warning"> course already existst</div>
 
 
         <?php
@@ -206,20 +208,26 @@ include "../../ini.php";  ?>
                         if (empty($msgerrors)) {
 
                             $values = array(
-                                "catcourses_name" => $name,
-                                "catcourses_name_ar" => $namear
+                                "courses_name" => $name,
+                                "courses_name_ar" => $namear , 
+                                "courses_desc" => $desc , 
+                                "courses_desc_ar" => $descar,
+                                "courses_hour" => $hour , 
+                                "courses_document" => $document,
+                                "courses_common" => $common , 
+                                "courses_type" => $category
                             );
                             $countinsert  = insertData($table, $values);
                             if ($countinsert > 0) {
 
         ?>
-                <div class="alert alert-success"> Add Category Success </div>
+                <div class="alert alert-success"> Add Courses Success </div>
 
 
 
             <?php
 
-                                header("Location:catcourses.php");
+                                header("Location:courses.php");
                                 exit();
                             } else {
             ?>
