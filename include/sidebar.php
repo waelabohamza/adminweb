@@ -54,6 +54,46 @@
 
         </li>
         </a>
+        <a href="../catcourses/catcourses.php">
+        <li>
+            <span>
+                <i class="fa fa-suitcase fa-lg"> </i>
+            </span>
+
+            Catergories Course
+
+        </li>
+        </a>
+        <a href="../services/services.php">
+        <li>
+            <span>
+                <i class="fa fa-suitcase fa-lg"> </i>
+            </span>
+
+            courses
+
+        </li>
+        </a>
+        <a href="../services/services.php">
+        <li>
+            <span>
+                <i class="fa fa-suitcase fa-lg"> </i>
+            </span>
+
+            categories Experts 
+
+        </li>
+        </a>
+        <a href="../services/services.php">
+        <li>
+            <span>
+                <i class="fa fa-suitcase fa-lg"> </i>
+            </span>
+
+            Experts
+
+        </li>
+        </a>
         <a href="">
         <li>
 
