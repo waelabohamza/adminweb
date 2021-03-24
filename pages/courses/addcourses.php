@@ -7,78 +7,130 @@ include "../../ini.php";  ?>
 
 <div class="container-fluid">
 
-  <div class="row">
+    <div class="row">
 
-    <?php include "../../include/menutop.php";  ?>
-
-  </div>
-  <!-- Edn Menu-top -->
-
-
-  <!-- Start SideBar And Body Page -->
-
-  <div class="row">
-
-    <!-- Start SideBar  -->
-    <div class="col-md-4 col-lg-2 hidden-xs hidden-sm sidebar">
-
-      <?php include "../../include/sidebar.php";   ?>
+        <?php include "../../include/menutop.php";  ?>
 
     </div>
-    <!-- End SideBar  -->
-
-    <!-- Start SideBar  -->
-    <div class="col-xs-12  col-md-8 col-lg-10">
-
-      <!-- start Body =================================== -->
-      <?php
+    <!-- Edn Menu-top -->
 
 
-      $do  = isset($_GET['do']) ?   $_GET['do'] : "add";
+    <!-- Start SideBar And Body Page -->
 
-      if ($do  == "add") {
+    <div class="row">
 
-      ?>
+        <!-- Start SideBar  -->
+        <div class="col-md-4 col-lg-2 hidden-xs hidden-sm sidebar">
+
+            <?php include "../../include/sidebar.php";   ?>
+
+        </div>
+        <!-- End SideBar  -->
+
+        <!-- Start SideBar  -->
+        <div class="col-xs-12  col-md-8 col-lg-10">
+
+            <!-- start Body =================================== -->
+            <?php
 
 
-        <div class="panel panel-default panel-custom">
-          <div class="panel-heading">
-            <h3 class="panel-title">Add Category Course</h3>
-          </div>
-          <div class="panel-body">
+            $do  = isset($_GET['do']) ?   $_GET['do'] : "add";
 
-            <form enctype="multipart/form-data" autocomplete="off" class="form-horizontal addvalidate" action="<?php echo $_SERVER['PHP_SELF'] . '?do=insert'; ?>" method="post">
-              <div class="form-group">
-                <label for="name" class="col-sm-2 control-label">category name</label>
-                <div class="col-sm-10">
-                  <input type="text" name="name" class="form-control" id="name" placeholder="name">
+            if ($do  == "add") {
+
+            ?>
+
+
+                <div class="panel panel-default panel-custom">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Add Courses Course</h3>
+                    </div>
+                    <div class="panel-body">
+
+                        <form enctype="multipart/form-data" autocomplete="off" class="form-horizontal addvalidate" action="<?php echo $_SERVER['PHP_SELF'] . '?do=insert'; ?>" method="post">
+                            <div class="form-group">
+                                <label for="name" class="col-sm-2 control-label">Courses name</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="name" class="form-control" id="name" placeholder="name">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="namear" class="col-sm-2 control-label">Course name arabic</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="namear" class="form-control" id="namear" placeholder="namear">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="desc" class="col-sm-2 control-label">description </label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="desc" class="form-control" id="desc" placeholder="description">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="descar" class="col-sm-2 control-label">description  arabic</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="descar" class="form-control" id="descar" placeholder="description arabic">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="hour" class="col-sm-2 control-label">hour</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="hour" class="form-control" id="hour" placeholder="hour">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="document" class="col-sm-2 control-label">document</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="document" class="form-control" id="document" placeholder="document">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="common" class="col-sm-2 control-label">Common</label>
+                                <div class="col-sm-10">
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="common" value="1">
+                                            Yes
+                                        </label>
+                                    </div>
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="common" value="0" checked>
+                                            No
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="role" class="col-sm-2 control-label">Choose Category</label>
+                                <div class="col-sm-10">
+                                    <select class="niceselect wide" name="category">
+                                        <?php $categories = getAllData("catcourses", "1 = 1  $and ORDER BY catcourses_id ASC")['values'];
+                                        foreach ($categories as $category) { ?>
+                                            <option value="<?= $category['catcourses_id'] ?>"><?= $category['catcourses_name'] ?></option>
+                                        <?php } ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <button type="submit" class="btn btn-success btn-sm"> <i class="fa fa-plus"></i> Add Category Course</button>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
                 </div>
-              </div>
-              <div class="form-group">
-                <label for="namear" class="col-sm-2 control-label">category name arabic</label>
-                <div class="col-sm-10">
-                  <input type="text" name="namear" class="form-control" id="namear" placeholder="namear">
-                </div>
-              </div>
-           
-              <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                  <button type="submit" class="btn btn-success btn-sm"> <i class="fa fa-plus"></i> Add Category Course</button>
-                </div>
-              </div>
-            </form>
 
-          </div>
+                <!-- End Body ======================================= -->
+
         </div>
 
-        <!-- End Body ======================================= -->
+
 
     </div>
-
-
-
-  </div>
-  <!-- End SideBar And Body Page -->
+    <!-- End SideBar And Body Page -->
 
 
 </div>
@@ -92,87 +144,107 @@ include "../../ini.php";  ?>
 <!-- End Body  -->
 
 <?php
-      } elseif ($do == "insert") {
+            } elseif ($do == "insert") {
 
-        if ($_SERVER['REQUEST_METHOD'] == "POST") {
-          //    Start Page Insert 
+                if ($_SERVER['REQUEST_METHOD'] == "POST") {
+                    //    Start Page Insert 
 
-          $table = "catcourses";
+                    $table = "courses";
 
-          $msgerrors = array();
+                    $msgerrors = array();
 
-          $verfiycode = rand(10000, 99999);
+                    $verfiycode = rand(10000, 99999);
+
+                    $name = superFilter($_POST['name']);
+
+                    checkLength("course name",  $name, 2, 50);
+
+                    $namear = $_POST['namear'];
+
+                    checkLength("course name arabic",  $namear, 2, 50);
+
+                    $desc = superFilter($_POST['desc']);
+
+                    checkLength("description ",  $desc, 2, 100);
+
+                    $descar = superFilter($_POST['descar']);
+
+                    checkLength("description  arabic",  $descar, 2, 100);
+
+                    
+                    $document = superFilter($_POST['document']);
+
+                    checkLength("document ",  $document, 2, 100);
 
 
-          $name = superFilter($_POST['name']);
+                    $hour = superFilter($_POST['hour']);
 
-          checkLength("category name",  $name, 2, 50);
+                    checkLength("hour ",  $hour, 1, 50);
+                    
 
-          $namear = $_POST['namear'];
-
-          checkLength("category name arabic",  $namear, 2, 50);
-
+                    $common =superFilter($_POST['common']);
 
 
-          $data = getData("catcourses", "catcourses_name",  $name);
 
-          $count = $data['count'];
+                    $data = getData("catcourses", "catcourses_name",  $name);
 
-          if ($count > 0) {
+                    $count = $data['count'];
+
+                    if ($count > 0) {
 
 ?>
 
-    <div class="alert alert-warning"> category already existst</div>
+        <div class="alert alert-warning"> category already existst</div>
 
 
-    <?php
+        <?php
 
-            // echo json_encode(array("status" => "faild", "cause" => "email Or phone already existst", "key" => "found"));
+                        // echo json_encode(array("status" => "faild", "cause" => "email Or phone already existst", "key" => "found"));
 
-          } else {
+                    } else {
 
-            if (empty($msgerrors)) {
+                        if (empty($msgerrors)) {
 
-              $values = array(
-                "catcourses_name" => $name,
-                "catcourses_name_ar" => $namear
-              );
-              $countinsert  = insertData($table, $values);
-              if ($countinsert > 0) {
+                            $values = array(
+                                "catcourses_name" => $name,
+                                "catcourses_name_ar" => $namear
+                            );
+                            $countinsert  = insertData($table, $values);
+                            if ($countinsert > 0) {
 
-    ?>
-        <div class="alert alert-success"> Add Category Success </div>
+        ?>
+                <div class="alert alert-success"> Add Category Success </div>
 
 
 
-      <?php
+            <?php
 
-                header("Location:catcourses.php");
-                exit();
-              } else {
-      ?>
-        <div class="alert alert-danger mg-15"> Insert Faild Try Again</div>
-      <?php
-              }
+                                header("Location:catcourses.php");
+                                exit();
+                            } else {
+            ?>
+                <div class="alert alert-danger mg-15"> Insert Faild Try Again</div>
+            <?php
+                            }
+                        } else {
+
+                            foreach ($msgerrors as $errors) {
+            ?>
+                <div class="mg-15  alert alert-warning"><?php echo $errors;  ?></div>
+<?php
+                            }
+                            // echo json_encode(array("status" => "faild", "cause" => $msgerrors, "key" => "insert"));
+                        }
+                    }
+                }
+                //    End Page Insert
+                else {
+                    echo "reuest Not post";
+                }
             } else {
 
-              foreach ($msgerrors as $errors) {
-      ?>
-        <div class="mg-15  alert alert-warning"><?php echo $errors;  ?></div>
-<?php
-              }
-              // echo json_encode(array("status" => "faild", "cause" => $msgerrors, "key" => "insert"));
+                echo "Page Not Found";
             }
-          }
-        }
-        //    End Page Insert
-        else {
-          echo "reuest Not post";
-        }
-      } else {
-
-        echo "Page Not Found";
-      }
 ?>
 
 <?php include "../../include/footer.php";
