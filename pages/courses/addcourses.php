@@ -217,25 +217,18 @@ include "../../ini.php";  ?>
                                 "courses_common" => $common,
                                 "courses_type" => $category
                             );
-
                             $countinsert  = insertData($table, $values);
-
-                            if ($countinsert > 0) {
-
-        
-        
-            ?>
-
+                            if ($countinsert > 0){
+        ?>
                 <div class="alert alert-success"> Add Courses Success </div>
-
-
             <?php
-
                                 header("Location:courses.php");
                                 exit();
-                            } else {
+                           
+                            }else{
+                                
             ?>
-                <div class="alert alert-danger mg-15"> Insert Faild Try Again</div>
+               <div class="alert alert-danger mg-15"> Insert Faild Try Again</div>
             <?php
                             }
                         } else {
