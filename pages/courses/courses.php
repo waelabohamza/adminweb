@@ -107,7 +107,7 @@ $linkdeletepage     = "deletecourses.php";
                                 <td class="hidden-xs "><?php echo $course['courses_name_ar']
                                                         ?></td>
                                 <td>
-                                    <a href="<?= $linkeditpage ?>?coursesid=<?= $course['courses_id'] ?>&catcoures=<?php echo urlencode(serialize($course)); ?>" class="btn-primary btn-sm mg-h-5 "> <i class="fa fa-edit"> </i> <span class="hidden-xs">Edit</span> </a>
+                                    <a href="<?= $linkeditpage ?>?coursesid=<?= $course['courses_id'] ?>&courses=<?php echo urlencode(serialize($course)); ?>" class="btn-primary btn-sm mg-h-5 "> <i class="fa fa-edit"> </i> <span class="hidden-xs">Edit</span> </a>
                                     <a href="<?= $linkdeletepage ?>?coursesid=<?php echo  $course['courses_id']
                                                                                     ?>" class="btn-danger btn-sm mg-h-5 "><i class="fa fa-remove"> </i> <span class="hidden-xs">Delete</span> </a>
                                 </td>
