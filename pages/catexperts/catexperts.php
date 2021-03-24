@@ -6,15 +6,11 @@
 
 // Var Global For Every Page 
 
-$titlepage          = "Categories";
-$linkaddpage        = "addcategories.php";
-$titleaddpage       = "Add Categories";
-$linkeditpage       = "editcategories.php";
-$linkdeletepage     = "deletecategories.php";
-
-
-
-
+$titlepage          = "categories Experts";
+$linkaddpage        = "addcatexperts.php";
+$titleaddpage       = "Add category for Expert";
+$linkeditpage       = "editcatexperts.php";
+$linkdeletepage     = "deletecatexperts.php";
 
 ?>
 
@@ -42,9 +38,13 @@ $linkdeletepage     = "deletecategories.php";
 
         </div>
         <!-- End SideBar  -->
+
         <!-- Start SideBar  -->
         <div class="col-xs-12  col-md-8 col-lg-10">
+
             <!-- start Body =================================== -->
+
+
             <div class="panel panel-default panel-custom manage">
                 <div class="panel-heading">
                     <h3 class="panel-title"><?php echo $titlepage; ?></h3>
@@ -54,31 +54,7 @@ $linkdeletepage     = "deletecategories.php";
                         <div class="col-xs-6 col-sm-9 ">
                             <a href="<?= $linkaddpage ?>" class="btn btn-success btn-sm">+ <?php echo $titleaddpage;   ?></a>
                         </div>
-                        <!-- Start Choose Select -->
-                        <!-- <div class="col-xs-6 col-sm-3 col-pull-right">
 
-                            <form action="" method="get" class="parent-search m-b">
-
-                                <select name="searchclass" class="niceselect wide">
-                                    <option value="0">choose class</option> -->
-                        <?php
-                        // foreach ($classsearch as $stdclass) {
-                        //     echo "<option value='" . $stdclass['class_id'] . "'";
-
-                        //     if ((isset($_GET['searchclass']) && $_GET['searchclass'] == $stdclass['class_id']) || (isset($_SESSION['searchclass']) && $_SESSION['searchclass'] == $stdclass['class_id'])) {
-
-                        //         echo "selected";
-                        //     }
-                        //     echo ">" .  $stdclass['class_name'] . "</option>";
-                        // }
-                        ?>
-                        <!-- </select>
-                                <button type="submit" class="btn btn-danger"><i class="fa fa-search"></i></button>
-
-                            </form>
-                            <div class="clearfix m-b"></div>
-                        </div> -->
-                        <!-- End Choose Select -->
                     </div>
                     <div class="clearfix"></div>
 
@@ -89,6 +65,7 @@ $linkdeletepage     = "deletecategories.php";
                         <li> <a href="" data-target="approved">approved</a> </li> -->
                     </ul>
                     <!-- End pager -->
+
                     <div class="clearfix"></div>
                     <form action="<?= $_SERVER['PHP_SELF']; ?> " method="get" class="parent-search m-b">
                         <div class="row">
@@ -99,7 +76,7 @@ $linkdeletepage     = "deletecategories.php";
                                 <?php
                                 if (isset($_GET['search'])) {
                                     $get = $_GET['search'];
-                                    $and = "And (categories_name  LIKE  '%$get%') OR (categories_name_ar  LIKE  '%$get%') ";
+                                    $and = "And (catexperts_name  LIKE  '%$get%') OR (catexperts_name_ar  LIKE  '%$get%') ";
                                 } else {
                                     $and = null;
                                 };
@@ -118,18 +95,19 @@ $linkdeletepage     = "deletecategories.php";
                                 <td>control</td>
                             </tr>
                         </thead>
+
                         <?php
-                        $categories = getAllData("categories", "1 = 1  $and ORDER BY categories_id DESC")['values'];
-                        foreach ($categories as $category) {
+                        $catexperts = getAllData("catexperts", "1 = 1  $and ORDER BY catexperts_id DESC")['values'];
+                        foreach ($catexperts as $catexpert) {
                         ?>
                             <tr>
-                                <td class=" "><?php echo $category['categories_name']
+                                <td class=" "><?php echo $catexpert['catexperts_name']
                                                 ?></td>
-                                <td class="hidden-xs "><?php echo $category['categories_name_ar']
+                                <td class="hidden-xs "><?php echo $catexpert['catexperts_name_ar']
                                                         ?></td>
                                 <td>
-                                    <a href="<?= $linkeditpage ?>?categoriesid=<?= $category['categories_id'] ?>&category=<?php echo urlencode(serialize($category)) ; ?>" class="btn-primary btn-sm mg-h-5 "> <i class="fa fa-edit"> </i> <span class="hidden-xs">Edit</span> </a>
-                                    <a href="<?= $linkdeletepage ?>?categoriesid=<?php echo  $category['categories_id']
+                                    <a href="<?= $linkeditpage ?>?catexpertsid=<?= $catexpert['catexperts_id'] ?>&catexperts=<?php echo urlencode(serialize($catexpert)); ?>" class="btn-primary btn-sm mg-h-5 "> <i class="fa fa-edit"> </i> <span class="hidden-xs">Edit</span> </a>
+                                    <a href="<?= $linkdeletepage ?>?catexpertsid=<?php echo  $catexpert['catexperts_id']
                                                                                     ?>" class="btn-danger btn-sm mg-h-5 "><i class="fa fa-remove"> </i> <span class="hidden-xs">Delete</span> </a>
                                 </td>
                             </tr>

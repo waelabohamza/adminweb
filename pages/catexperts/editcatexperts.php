@@ -5,9 +5,9 @@ include "../../ini.php";  ?>
 <?php include "../../include/navmobile.php";   ?>
 
 <?php
-if (isset($_GET['catcoures'])) {
+if (isset($_GET['catexperts'])) {
 
-    $category = unserialize($_GET['catcoures']);
+    $category = unserialize($_GET['catexperts']);
 }
 
 
@@ -61,17 +61,17 @@ if (isset($_GET['catcoures'])) {
 
 
                         <form enctype="multipart/form-data" autocomplete="off" class="form-horizontal addvalidate" action="<?php echo $_SERVER['PHP_SELF'] . '?do=update'; ?>" method="post">
-                            <input type="hidden" name="id" value="<?= $category['catcourses_id'] ?>">
+                            <input type="hidden" name="id" value="<?= $category['catexperts_id'] ?>">
                             <div class="form-group">
                                 <label for="name" class="col-sm-2 control-label">category name</label>
                                 <div class="col-sm-10">
-                                    <input type="text" name="name" class="form-control" id="name" placeholder="name" value="<?= $category['catcourses_name'] ?>">
+                                    <input type="text" name="name" class="form-control" id="name" placeholder="name" value="<?= $category['catexperts_name'] ?>">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="namear" class="col-sm-2 control-label">category name arabic</label>
                                 <div class="col-sm-10">
-                                    <input type="text" name="namear" class="form-control" id="namear" placeholder="namear" value="<?= $category['catcourses_name_ar'] ?>">
+                                    <input type="text" name="namear" class="form-control" id="namear" placeholder="namear" value="<?= $category['catexperts_name_ar'] ?>">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -110,73 +110,72 @@ if (isset($_GET['catcoures'])) {
                 if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     //    Start Page Insert 
 
-                    $table = "catcourses";
+                    $table = "catexperts";
 
                     $msgerrors = array();
 
+                        $id = superFilter($_POST['id']);
 
-                    $id = superFilter($_POST['id']);
+                        $name = superFilter($_POST['name']);
 
-                    $name = superFilter($_POST['name']);
+                        checkLength("category name",  $name, 2, 50);
 
-                    checkLength("category name",  $name, 2, 50);
+                        $namear = $_POST['namear'];
 
-                    $namear = $_POST['namear'];
-
-                    checkLength("category name arabic",  $namear, 2, 50);
-
+                        checkLength("category name arabic",  $namear, 2, 50);
 
 
-                    $data = getData("categories", "categories_id",  $id);
 
-                    $count = $data['count'];
+                        $data = getData("catexperts", "catexperts_id",  $id);
 
-                    if ($count == 0) {
+                        $count = $data['count'];
+
+                        if ($count == 0) {
 
 ?>
 
-        <div class="alert alert-warning"> category Not exsist</div>
-
-
-        <?php
-
-                        // echo json_encode(array("status" => "faild", "cause" => "email Or phone already existst", "key" => "found"));
-
-                    } else {
-
-                        if (empty($msgerrors)) {
-
-                            $values = array(
-                                "catcourses_name" => $name,
-                                "catcourses_name_ar" => $namear
-                            );
-                            $countupdate = updateData($table, $values, "catcourses_id = '$id' ");
-                            if ($countinsert > 0) {
-
-        ?>
-                <div class="alert alert-success"> Edit Category Success </div>
-
+            <div class="alert alert-warning"> category Not exsist</div>
 
 
             <?php
 
-                                header("Location:catcourses.php");
-                                exit();
-                            } else {
-                                header("Location:catcourses.php");
-                                exit();
-                            }
+                            // echo json_encode(array("status" => "faild", "cause" => "email Or phone already existst", "key" => "found"));
+
                         } else {
 
-                            foreach ($msgerrors as $errors) {
-            ?>
-                <div class="mg-15  alert alert-warning"><?php echo $errors;  ?></div>
-<?php
-                            }
-                            // echo json_encode(array("status" => "faild", "cause" => $msgerrors, "key" => "insert"));
-                        }
-                    }
+                            if (empty($msgerrors)) {
 
+                                $values = array(
+                                    "catexperts_name" => $name,
+                                    "catexperts_name_ar" => $namear
+                                );
+                                $countupdate = updateData($table, $values, "catexperts_id = '$id' ");
+                                if ($countinsert > 0) {
+
+            ?>
+                    <div class="alert alert-success"> Edit Category Success </div>
+
+
+
+                <?php
+
+                                    header("Location:catexperts.php");
+                                    exit();
+                                } else {
+                                    header("Location:catexperts.php");
+                                    exit();
+                                }
+                            } else {
+
+                                foreach ($msgerrors as $errors) {
+                ?>
+                    <div class="mg-15  alert alert-warning"><?php echo $errors;  ?></div>
+<?php
+                                }
+                                // echo json_encode(array("status" => "faild", "cause" => $msgerrors, "key" => "insert"));
+                            }
+                        }
+                    
                     //    End Page Insert
                 } else {
                     echo "reuest Not post";

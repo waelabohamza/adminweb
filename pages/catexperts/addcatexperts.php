@@ -3,17 +3,6 @@ ob_start();
 include "../../ini.php";  ?>
 <?php include "../../include/header.php"; ?>
 <?php include "../../include/navmobile.php";   ?>
-
-<?php
-if (isset($_GET['catcoures'])) {
-
-    $category = unserialize($_GET['catcoures']);
-}
-
-
-?>
-
-
 <!-- Start Body  -->
 
 <div class="container-fluid">
@@ -45,38 +34,35 @@ if (isset($_GET['catcoures'])) {
             <?php
 
 
-            $do  = isset($_GET['do']) ?   $_GET['do'] : "edit";
+            $do  = isset($_GET['do']) ?   $_GET['do'] : "add";
 
-            if ($do  == "edit") {
+            if ($do  == "add") {
 
             ?>
 
 
                 <div class="panel panel-default panel-custom">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Edit Categories</h3>
+                        <h3 class="panel-title">Add Category Experts</h3>
                     </div>
-
                     <div class="panel-body">
 
-
-                        <form enctype="multipart/form-data" autocomplete="off" class="form-horizontal addvalidate" action="<?php echo $_SERVER['PHP_SELF'] . '?do=update'; ?>" method="post">
-                            <input type="hidden" name="id" value="<?= $category['catcourses_id'] ?>">
+                        <form enctype="multipart/form-data" autocomplete="off" class="form-horizontal addvalidate" action="<?php echo $_SERVER['PHP_SELF'] . '?do=insert'; ?>" method="post">
                             <div class="form-group">
                                 <label for="name" class="col-sm-2 control-label">category name</label>
                                 <div class="col-sm-10">
-                                    <input type="text" name="name" class="form-control" id="name" placeholder="name" value="<?= $category['catcourses_name'] ?>">
+                                    <input type="text" name="name" class="form-control" id="name" placeholder="name">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="namear" class="col-sm-2 control-label">category name arabic</label>
                                 <div class="col-sm-10">
-                                    <input type="text" name="namear" class="form-control" id="namear" placeholder="namear" value="<?= $category['catcourses_name_ar'] ?>">
+                                    <input type="text" name="namear" class="form-control" id="namear" placeholder="namear">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-offset-2 col-sm-10">
-                                    <button type="submit" class="btn btn-success btn-sm"> <i class="fa fa-check"></i> Update Category </button>
+                                    <button type="submit" class="btn btn-success btn-sm"> <i class="fa fa-plus"></i> Add Category </button>
                                 </div>
                             </div>
                         </form>
@@ -105,17 +91,17 @@ if (isset($_GET['catcoures'])) {
 <!-- End Body  -->
 
 <?php
-            } elseif ($do == "update") {
+            } elseif ($do == "insert") {
 
                 if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     //    Start Page Insert 
 
-                    $table = "catcourses";
+                    $table = "catexperts";
 
                     $msgerrors = array();
 
+                    $verfiycode = rand(10000, 99999);
 
-                    $id = superFilter($_POST['id']);
 
                     $name = superFilter($_POST['name']);
 
@@ -127,15 +113,16 @@ if (isset($_GET['catcoures'])) {
 
 
 
-                    $data = getData("categories", "categories_id",  $id);
+
+                    $data = getData("catexperts", "catexperts_name",  $name);
 
                     $count = $data['count'];
 
-                    if ($count == 0) {
+                    if ($count > 0) {
 
 ?>
 
-        <div class="alert alert-warning"> category Not exsist</div>
+        <div class="alert alert-warning"> category already existst</div>
 
 
         <?php
@@ -147,24 +134,25 @@ if (isset($_GET['catcoures'])) {
                         if (empty($msgerrors)) {
 
                             $values = array(
-                                "catcourses_name" => $name,
-                                "catcourses_name_ar" => $namear
+                                "catexperts_name" => $name,
+                                "catexperts_name_ar" => $namear
                             );
-                            $countupdate = updateData($table, $values, "catcourses_id = '$id' ");
+                            $countinsert  = insertData($table, $values);
                             if ($countinsert > 0) {
 
         ?>
-                <div class="alert alert-success"> Edit Category Success </div>
+                <div class="alert alert-success"> Add Category Success </div>
 
 
 
             <?php
 
-                                header("Location:catcourses.php");
+                                header("Location:catexperts.php");
                                 exit();
                             } else {
-                                header("Location:catcourses.php");
-                                exit();
+            ?>
+                <div class="alert alert-danger mg-15"> Insert Faild Try Again</div>
+            <?php
                             }
                         } else {
 
@@ -176,9 +164,9 @@ if (isset($_GET['catcoures'])) {
                             // echo json_encode(array("status" => "faild", "cause" => $msgerrors, "key" => "insert"));
                         }
                     }
-
-                    //    End Page Insert
-                } else {
+                }
+                //    End Page Insert
+                else {
                     echo "reuest Not post";
                 }
             } else {
