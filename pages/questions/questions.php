@@ -6,11 +6,11 @@
 
 // Var Global For Every Page 
 
-$titlepage          = "Add Courses";
-$linkaddpage        = "addcourses.php";
-$titleaddpage       = "Add Courses";
-$linkeditpage       = "editcourses.php";
-$linkdeletepage     = "deletecourses.php";
+$titlepage          = "Add Questions";
+$linkaddpage        = "addquestions.php";
+$titleaddpage       = "Add Questions";
+$linkeditpage       = "editquestions.php";
+$linkdeletepage     = "deletequestions.php";
 
 ?>
 
@@ -59,7 +59,7 @@ $linkdeletepage     = "deletecourses.php";
 
                     <!-- start pager -->
                     <ul class="nav nav-tabs m-b pager-section">
-                        <li class="active"><a href="" data-target="all" class="all">All Courses</a> </li>
+                        <li class="active"><a href="" data-target="all" class="all">All Questions</a> </li>
                         <!-- <li> <a href="" data-target="wait">wait approve</a> </li>
                         <li> <a href="" data-target="approved">approved</a> </li> -->
                     </ul>
@@ -75,7 +75,7 @@ $linkdeletepage     = "deletecourses.php";
                                 <?php
                                 if (isset($_GET['search'])) {
                                     $get = $_GET['search'];
-                                    $and = "And (courses_name  LIKE  '%$get%') OR (courses_name_ar  LIKE  '%$get%') ";
+                                    $and = "And (questions_name  LIKE  '%$get%') OR (questions_name_ar  LIKE  '%$get%') ";
                                 } else {
                                     $and = null;
                                 };
@@ -98,17 +98,17 @@ $linkdeletepage     = "deletecourses.php";
                         </thead>
 
                         <?php
-                        $courses = getAllData("courses", "1 = 1  $and ORDER BY courses_id DESC")['values'];
-                        foreach ($courses as $course) {
+                        $questions = getAllData("questions", "1 = 1  $and ORDER BY questions_id DESC")['values'];
+                        foreach ($questions as $question) {
                         ?>
                             <tr>
-                                <td class=" "><?php echo $course['courses_name']
+                                <td class=" "><?php echo $question['questions_name']
                                                 ?></td>
-                                <td class="hidden-xs "><?php echo $course['courses_name_ar']
+                                <td class="hidden-xs "><?php echo $question['questions_name_ar']
                                                         ?></td>
                                 <td>
-                                    <a href="<?= $linkeditpage ?>?coursesid=<?= $course['courses_id'] ?>&courses=<?php echo urlencode(serialize($course)); ?>" class="btn-primary btn-sm mg-h-5 "> <i class="fa fa-edit"> </i> <span class="hidden-xs">Edit</span> </a>
-                                    <a href="<?= $linkdeletepage ?>?coursesid=<?php echo  $course['courses_id']
+                                    <a href="<?= $linkeditpage ?>?questionsid=<?= $question['questions_id'] ?>&courses=<?php echo urlencode(serialize($question)); ?>" class="btn-primary btn-sm mg-h-5 "> <i class="fa fa-edit"> </i> <span class="hidden-xs">Edit</span> </a>
+                                    <a href="<?= $linkdeletepage ?>?questionsid=<?php echo  $question['questions_id']
                                                                                     ?>" class="btn-danger btn-sm mg-h-5 "><i class="fa fa-remove"> </i> <span class="hidden-xs">Delete</span> </a>
                                 </td>
                             </tr>
