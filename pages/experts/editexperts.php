@@ -3,6 +3,18 @@ ob_start();
 include "../../ini.php";  ?>
 <?php include "../../include/header.php"; ?>
 <?php include "../../include/navmobile.php";   ?>
+
+<?php
+
+if (isset($_GET['experts'])) {
+
+    $experts = unserialize($_GET['experts']);
+}
+
+
+?>
+
+
 <!-- Start Body  -->
 
 <div class="container-fluid">
@@ -34,54 +46,52 @@ include "../../ini.php";  ?>
             <?php
 
 
-            $do  = isset($_GET['do']) ?   $_GET['do'] : "add";
+            $do  = isset($_GET['do']) ?   $_GET['do'] : "edit";
 
-            if ($do  == "add") {
+            if ($do  == "edit") {
 
             ?>
-
-
                 <div class="panel panel-default panel-custom">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Add Courses</h3>
+                        <h3 class="panel-title">Edit expert info </h3>
                     </div>
                     <div class="panel-body">
-
-                        <form enctype="multipart/form-data" autocomplete="off" class="form-horizontal addvalidate" action="<?php echo $_SERVER['PHP_SELF'] . '?do=insert'; ?>" method="post">
+                        <form enctype="multipart/form-data" autocomplete="off" class="form-horizontal addvalidate" action="<?php echo $_SERVER['PHP_SELF'] . '?do=update'; ?>" method="post">
+                            <input type="hidden" name="id" value="<?= $experts['experts_id'] ?>">
                             <div class="form-group">
                                 <label for="name" class="col-sm-2 control-label">name</label>
                                 <div class="col-sm-10">
-                                    <input type="text" name="name" class="form-control" id="name" placeholder="name">
+                                    <input type="text" name="name" class="form-control" id="name" placeholder="name" value="<?= $experts['experts_name'] ?>">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="namear" class="col-sm-2 control-label">name arabic</label>
                                 <div class="col-sm-10">
-                                    <input type="text" name="namear" class="form-control" id="namear" placeholder="namear">
+                                    <input type="text" name="namear" class="form-control" id="namear" placeholder="namear" value="<?= $experts['experts_name_ar'] ?>">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="desc" class="col-sm-2 control-label">description </label>
                                 <div class="col-sm-10">
-                                    <input type="text" name="desc" class="form-control" id="desc" placeholder="description">
+                                    <input type="text" name="desc" class="form-control" id="desc" placeholder="description" value="<?= $experts['experts_desc'] ?>">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="descar" class="col-sm-2 control-label">description arabic</label>
                                 <div class="col-sm-10">
-                                    <input type="text" name="descar" class="form-control" id="descar" placeholder="description arabic">
+                                    <input type="text" name="descar" class="form-control" id="descar" placeholder="description arabic" value="<?= $experts['experts_desc_ar'] ?>">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="experience" class="col-sm-2 control-label">experience</label>
                                 <div class="col-sm-10">
-                                    <input type="text" name="exp" class="form-control" id="experience" placeholder="experience">
+                                    <input type="text" name="exp" class="form-control" id="experience" placeholder="experience" value="<?= $experts['experts_experience'] ?>">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="specialty" class="col-sm-2 control-label">specialty</label>
                                 <div class="col-sm-10">
-                                    <input type="text" name="spec" class="form-control" id="specialty" placeholder="specialty">
+                                    <input type="text" name="spec" class="form-control" id="specialty" placeholder="specialty" value="<?= $experts['experts_spec'] ?>">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -89,13 +99,13 @@ include "../../ini.php";  ?>
                                 <div class="col-sm-10">
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="common" value="1">
+                                            <input type="radio" name="common" value="1" <?php if ($experts['experts_common'] == "1") echo "checked";  ?>>
                                             Yes
                                         </label>
                                     </div>
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="common" value="0" checked>
+                                            <input type="radio" name="common" value="0" <?php if ($experts['experts_common'] == "0") echo "checked";  ?>>
                                             No
                                         </label>
                                     </div>
@@ -117,14 +127,14 @@ include "../../ini.php";  ?>
                                     <select class="niceselect wide" name="category">
                                         <?php $categories = getAllData("catexperts", "1 = 1  $and ORDER BY catexperts_id  DESC")['values'];
                                         foreach ($categories as $category) { ?>
-                                            <option value="<?= $category['catexperts_id'] ?>"><?= $category['catexperts_name'] ?></option>
+                                            <option value="<?= $category['catexperts_id'] ?>" <?php if ($experts['experts_cat'] == $category['catexperts_id']) echo "selected";  ?>><?= $category['catexperts_name'] ?></option>
                                         <?php } ?>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-offset-2 col-sm-10">
-                                    <button type="submit" class="btn btn-success btn-sm"> <i class="fa fa-plus"></i> Add Expert</button>
+                                    <button type="submit" class="btn btn-success btn-sm"> <i class="fa fa-plus"></i> Save Update</button>
                                 </div>
                             </div>
                         </form>
@@ -153,121 +163,113 @@ include "../../ini.php";  ?>
 <!-- End Body  -->
 
 <?php
-            } elseif ($do == "insert") {
+            } elseif ($do == "update") {
 
                 if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     //    Start Page Insert 
 
-                    $table = "experts";
+                    $table = "catcourses";
 
                     $msgerrors = array();
 
 
-                    $verfiycode = rand(10000, 99999);
 
+                    if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
+                        $table = "courses";
 
-                    if (isset($_FILES['file']['name'])) {
-                        $image      = image_data("file");
+                        $msgerrors = array();
 
-                        $filetmp   =  $image['tmp'];
+                        $id = superFilter($_POST['id']);
 
-                        $imagename =  rand(0, 1000000) . "_" . $image['name'];
-                    } else {
-                        $msgerrors[] = "Please Choose Image File ";
-                    }
+                        $verfiycode = rand(10000, 99999);
 
-                    $name = superFilter($_POST['name']);
+                        $name = superFilter($_POST['name']);
 
-                    checkLength("Expert name",  $name, 2, 50);
+                        checkLength("course name",  $name, 2, 50);
 
-                    $namear = superFilter($_POST['namear']);
+                        $namear = $_POST['namear'];
 
-                    checkLength("Expert name arabic",  $namear, 2, 50);
+                        checkLength("course name arabic",  $namear, 2, 50);
 
-                    $desc = superFilter($_POST['desc']);
+                        $desc = superFilter($_POST['desc']);
 
-                    checkLength("description ",  $desc, 2, 100);
+                        checkLength("description ",  $desc, 2, 100);
 
-                    $descar = superFilter($_POST['descar']);
+                        $descar = superFilter($_POST['descar']);
 
-                    checkLength("description  arabic",  $descar, 2, 100);
-  
+                        checkLength("description  arabic",  $descar, 2, 100);
 
-                    $spec    = superFilter($_POST['spec']);
+                        $document = superFilter($_POST['document']);
 
-                    checkLength("specialty",  $spec, 10, 120);
+                        checkLength("document ",  $document, 2, 100);
 
-                    $exp    = superFilter($_POST['exp']);
+                        $hour = superFilter($_POST['hour']);
 
-                    checkLength("experience",  $exp, 10, 120);
+                        checkLength("hour ",  $hour, 1, 50);
 
-                    $common =  superFilter($_POST['common']);
+                        $common = superFilter($_POST['common']);
 
-                    $category = superFilter($_POST['category']);
+                        $category = superFilter($_POST['category']);
 
+                        $data = getData("courses", "courses_id",  $id);
 
-                    $data = getData("courses", "courses_name",  $name);
+                        $count = $data['count'];
 
-                    $count = $data['count'];
-
-                    if ($count > 0) {
+                        if ($count == 0) {
 
 ?>
 
-        <div class="alert alert-warning"> Expert already existst</div>
+            <div class="alert alert-warning"> Course Not exsist</div>
 
 
-        <?php
-
-                        // echo json_encode(array("status" => "faild", "cause" => "email Or phone already existst", "key" => "found"));
-
-                    } else {
-
-                        if (empty($msgerrors)) {
-
-                            $values = array(
-                                "experts_name"          => $name        ,
-                                "experts_name_ar"       => $namear      ,
-                                "experts_image"         => $imagename   ,
-                                "experts_desc"          => $desc      ,
-                                "experts_desc_ar"       => $descar        ,
-                                "experts_experience"    => $exp    ,
-                                "experts_common"        => $common      ,
-                                "experts_spec"          => $spec    ,
-                                "experts_cat"           => $category  
-                            );
-                            $countinsert  = insertData($table, $values);
-
-                            if ($countinsert > 0){
-                                $filedir =  "experts";
-                                move_uploaded_file($filetmp, "../../api/upload/" . $filedir . "/" . $imagename);
-
-        ?>
-                <div class="alert alert-success"> Add Expert Success </div>
             <?php
-                                header("Location:experts.php");
-                                exit();
-                           
-                            }else{
-                                
-            ?>
-               <div class="alert alert-danger mg-15"> Insert Faild Try Again</div>
-            <?php
-                            }
+
+                            // echo json_encode(array("status" => "faild", "cause" => "email Or phone already existst", "key" => "found"));
+
                         } else {
 
-                            foreach ($msgerrors as $errors) {
+                            if (empty($msgerrors)) {
+
+                                $values = array(
+                                    "courses_name" => $name,
+                                    "courses_name_ar" => $namear,
+                                    "courses_desc" => $desc,
+                                    "courses_desc_ar" => $descar,
+                                    "courses_hour" => $hour,
+                                    "courses_document" => $document,
+                                    "courses_common" => $common,
+                                    "courses_type" => $category
+                                );
+                                $countupdate = updateData($table, $values, "courses_id = '$id' ");
+                                if ($countinsert > 0) {
+
             ?>
-                <div class="mg-15  alert alert-warning"><?php echo $errors;  ?></div>
+                    <div class="alert alert-success"> Edit Course Success </div>
+
+
+
+                <?php
+
+                                    header("Location:courses.php");
+                                    exit();
+                                } else {
+                                    header("Location:courses.php");
+                                    exit();
+                                }
+                            } else {
+
+                                foreach ($msgerrors as $errors) {
+                ?>
+                    <div class="mg-15  alert alert-warning"><?php echo $errors;  ?></div>
 <?php
+                                }
+                                // echo json_encode(array("status" => "faild", "cause" => $msgerrors, "key" => "insert"));
                             }
-                            // echo json_encode(array("status" => "faild", "cause" => $msgerrors, "key" => "insert"));
                         }
                     }
-                }
-                //    End Page Insert
-                else {
+                    //    End Page Insert
+                } else {
                     echo "reuest Not post";
                 }
             } else {
