@@ -3,7 +3,7 @@
     <div class="image_admin col-md-12">
 
         <img src="../../<?php echo  PATH_IMG ?>avatar.png  " class="img-responsive center-block" />
-  
+
     </div>
 
 </div>
@@ -13,97 +13,107 @@
 <div class="row">
 
     <ul class="list-unstyled listside">
-    <a href="../home/home.php">
-        <li>
+        <a href="../home/home.php">
+            <li>
 
-            <span>
-                <i class="fa fa-home fa-lg"> </i>
-            </span>
+                <span>
+                    <i class="fa fa-home fa-lg"> </i>
+                </span>
 
-            HomePage
+                HomePage
 
-        </li>
-    </a>
+            </li>
+        </a>
         <a href="../users/users.php">
-        <li>
-            <span>
-                <i class="fa fa-users fa-lg"> </i>
-            </span>
+            <li>
+                <span>
+                    <i class="fa fa-users fa-lg"> </i>
+                </span>
 
-            Users
+                Users
 
-        </li>
+            </li>
         </a>
         <a href="../categories/categories.php">
-        <li>
-            <span>
-                <i class="fa fa-list-alt fa-lg"> </i>
-            </span>
+            <li>
+                <span>
+                    <i class="fa fa-list-alt fa-lg"> </i>
+                </span>
 
-            Categories
+                Categories
 
-        </li>
+            </li>
         </a>
         <a href="../services/services.php">
-        <li>
-            <span>
-                <i class="fa fa-suitcase fa-lg"> </i>
-            </span>
+            <li>
+                <span>
+                    <i class="fa fa-suitcase fa-lg"> </i>
+                </span>
 
-            Services
+                Services
 
-        </li>
+            </li>
         </a>
         <a href="../catcourses/catcourses.php">
-        <li>
-            <span>
-                <i class="fa fa-suitcase fa-lg"> </i>
-            </span>
+            <li>
+                <span>
+                    <i class="fa fa-suitcase fa-lg"> </i>
+                </span>
 
-            Catergories Course
+                Catergories Course
 
-        </li>
+            </li>
         </a>
         <a href="../courses/courses.php">
-        <li>
-            <span>
-                <i class="fa fa-suitcase fa-lg"> </i>
-            </span>
+            <li>
+                <span>
+                    <i class="fa fa-suitcase fa-lg"> </i>
+                </span>
 
-            courses
+                courses
 
-        </li>
+            </li>
         </a>
         <a href="../catexperts/catexperts.php">
-        <li>
-            <span>
-                <i class="fa fa-suitcase fa-lg"> </i>
-            </span>
+            <li>
+                <span>
+                    <i class="fa fa-suitcase fa-lg"> </i>
+                </span>
 
-            categories Experts 
+                categories Experts
 
-        </li>
+            </li>
         </a>
-        <a href="../services/services.php">
-        <li>
-            <span>
-                <i class="fa fa-suitcase fa-lg"> </i>
-            </span>
+        <a href="../experts/experts.php">
+            <li>
+                <span>
+                    <i class="fa fa-suitcase fa-lg"> </i>
+                </span>
 
-            Experts
+                Experts
 
-        </li>
+            </li>
+        </a>
+        <a href="../questions/questions.php">
+            <li>
+                <span>
+                    <i class="fa fa-suitcase fa-lg"> </i>
+                </span>
+
+                Questions
+
+            </li>
         </a>
         <a href="">
-        <li>
+            <li>
 
-            <span>
-                <i class="fa fa-sign-out fa-lg"> </i>
-            </span>
+                <span>
+                    <i class="fa fa-sign-out fa-lg"> </i>
+                </span>
 
-            Logout
+                Logout
 
-        </li>
+            </li>
         </a>
 
     </ul>
