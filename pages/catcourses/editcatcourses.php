@@ -110,7 +110,7 @@ if (isset($_GET['catcoures'])) {
                 if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     //    Start Page Insert 
 
-                    $table = "categories";
+                    $table = "catcourses";
 
                     $msgerrors = array();
 
@@ -150,10 +150,10 @@ if (isset($_GET['catcoures'])) {
                             if (empty($msgerrors)) {
 
                                 $values = array(
-                                    "categories_name" => $name,
-                                    "categories_name_ar" => $namear 
+                                    "catcourses_name" => $name,
+                                    "catcourses_name_ar" => $namear 
                                 );
-                                $countupdate = updateData($table, $values, "categories_id = '$id' ");
+                                $countupdate = updateData($table, $values, "catcourses_id = '$id' ");
                                 if ($countinsert > 0) {
 
                                     ?>
@@ -163,10 +163,10 @@ if (isset($_GET['catcoures'])) {
 
                                         <?php
 
-                                    header("Location:categories.php");
+                                    header("Location:catcourses.php");
                                     exit();
                                 } else {
-                                    header("Location:categories.php");
+                                    header("Location:catcourses.php");
                                     exit();
                                 }
                             } else {

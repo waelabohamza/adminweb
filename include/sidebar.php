@@ -64,7 +64,7 @@
 
         </li>
         </a>
-        <a href="../services/services.php">
+        <a href="../courses/courses.php">
         <li>
             <span>
                 <i class="fa fa-suitcase fa-lg"> </i>
