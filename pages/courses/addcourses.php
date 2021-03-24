@@ -43,7 +43,7 @@ include "../../ini.php";  ?>
 
                 <div class="panel panel-default panel-custom">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Add  Courses</h3>
+                        <h3 class="panel-title">Add Courses</h3>
                     </div>
                     <div class="panel-body">
 
@@ -67,7 +67,7 @@ include "../../ini.php";  ?>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="descar" class="col-sm-2 control-label">description  arabic</label>
+                                <label for="descar" class="col-sm-2 control-label">description arabic</label>
                                 <div class="col-sm-10">
                                     <input type="text" name="descar" class="form-control" id="descar" placeholder="description arabic">
                                 </div>
@@ -170,7 +170,7 @@ include "../../ini.php";  ?>
 
                     checkLength("description  arabic",  $descar, 2, 100);
 
-                    
+
                     $document = superFilter($_POST['document']);
 
                     checkLength("document ",  $document, 2, 100);
@@ -182,9 +182,9 @@ include "../../ini.php";  ?>
 
 
 
-                    $common =superFilter($_POST['common']);
+                    $common = superFilter($_POST['common']);
 
-                    $category = superFilter($_POST['category']) ; 
+                    $category = superFilter($_POST['category']);
 
 
 
@@ -209,20 +209,24 @@ include "../../ini.php";  ?>
 
                             $values = array(
                                 "courses_name" => $name,
-                                "courses_name_ar" => $namear , 
-                                "courses_desc" => $desc , 
+                                "courses_name_ar" => $namear,
+                                "courses_desc" => $desc,
                                 "courses_desc_ar" => $descar,
-                                "courses_hour" => $hour , 
+                                "courses_hour" => $hour,
                                 "courses_document" => $document,
-                                "courses_common" => $common , 
+                                "courses_common" => $common,
                                 "courses_type" => $category
                             );
+
                             $countinsert  = insertData($table, $values);
+
                             if ($countinsert > 0) {
 
-        ?>
-                <div class="alert alert-success"> Add Courses Success </div>
+        
+        
+            ?>
 
+                <div class="alert alert-success"> Add Courses Success </div>
 
 
             <?php
