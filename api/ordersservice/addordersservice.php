@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     // End Image Request 
     $values = array(
         "ordersservice_aganist"     => $against,
-        "ordersservice_username"    => $userid,
+        "ordersservice_username"    => $username,
         "ordersservice_email"       => $email,
         "ordersservice_phone"       => $phone,
         "ordersservice_address"     => $address,
