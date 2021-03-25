@@ -4,6 +4,10 @@
 
 <?php
 
+$linkdeniedpage = "deniedorders.php";
+$linkdeletepage = "deleteorders.php";
+$linkapprovepage = "approvedorders.php";
+
 if (isset($_GET['search'])) {
     $get = $_GET['search'];
     $and = "And (ordersservice_username  LIKE  '%$get%') 
@@ -12,7 +16,9 @@ if (isset($_GET['search'])) {
 } else {
     $and = null;
 };
+
 if (isset($_GET['searchstatus'])) {
+
     $get = $_GET['searchstatus'];
     if ($get == "wait") {
         $and = "And (ordersservice_status  =  0 )";
@@ -23,7 +29,6 @@ if (isset($_GET['searchstatus'])) {
     if ($get == "denied") {
         $and = "And (ordersservice_status  =  10 )";
     }
-
 } else {
     $and = null;
 };
@@ -149,19 +154,18 @@ $titlepage  = "Orders Services View";
                                                         }
                                                         ?></td>
                                 <td>
-                                    <a href="<?= $linkdeletepage ?>?ordersid=<?php echo  $order['courses_id']
+                                    <a href="<?= $linkdeletepage ?>?ordersid=<?php echo  $order['ordersservice_id']
                                                                                 ?>" class="btn-primary btn-sm mg-h-5 "><i class="fa fa-info-circle"> </i> <span class="hidden-xs">View</span> </a>
 
                                     <?php if ($order['ordersservice_status'] == "0") { ?>
 
-                                        <a href="<?= $linkdeletepage ?>?ordersid=<?php echo  $order['courses_id']
+                                        <a href="<?= $linkapprovepage ?>?ordersid=<?php echo  $order['ordersservice_id']
                                                                                     ?>" class="btn-success btn-sm mg-h-5 "><i class="fa  fa-check"> </i> <span class="hidden-xs">Approve</span> </a>
-                                        <a href="<?= $linkdeletepage ?>?ordersid=<?php echo  $order['courses_id']
+                                        <a href="<?= $linkdeniedpage ?>?ordersid=<?php echo  $order['ordersservice_id']
                                                                                     ?>" class="btn-warning btn-sm mg-h-5 "><i class="fa fa-remove"> </i> <span class="hidden-xs">Deny</span> </a>
-
                                     <?php   } ?>
 
-                                    <a href="<?= $linkdeletepage ?>?ordersid=<?php echo  $order['courses_id']
+                                    <a href="<?= $linkdeletepage ?>?ordersid=<?php echo  $order['ordersservice_id']
                                                                                 ?>" class="btn-danger btn-sm mg-h-5 "><i class="fa fa-trash-o"> </i> <span class="hidden-xs">Delete</span> </a>
                                 </td>
                             </tr>

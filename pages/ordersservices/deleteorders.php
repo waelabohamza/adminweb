@@ -8,13 +8,20 @@ include "../../ini.php";  ?>
 
  
  
-   $id = $_GET['coursesid'] ; 
-   $count =  deleteData("courses" , "courses_id" , $id);
+   $id = $_GET['ordersid'] ; 
+
+   $count =  deleteData("ordersservice" , "ordersservice_id" , $id);
+
    if ($count > 0 ) {
-              header("Location:courses.php") ; 
+
+              header("Location:ordersservices.php") ; 
+
               exit() ; 
+
    }else {
-    $errors =  "Faild Add Category please try again" ; 
+
+    $errors =  "Faild Delete Orders Service" ; 
+
    }
    
  
