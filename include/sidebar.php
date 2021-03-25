@@ -104,6 +104,26 @@
 
             </li>
         </a>
+        <a href="../orderscourses/orderscourses.php">
+            <li>
+                <span>
+                    <i class="fa fa-inbox fa-lg"> </i>
+                </span>
+
+                Orders Course
+
+            </li>
+        </a>
+        <a href="../ordersservices/ordersservices.php">
+            <li>
+                <span>
+                    <i class="fa fa-inbox fa-lg"> </i>
+                </span>
+
+                Orders Service
+
+            </li>
+        </a>
         <a href="">
             
             <li>
