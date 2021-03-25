@@ -57,10 +57,10 @@ $startpage  = ($currentpage - 1) * $perpage;
                         </div>
                         <div class="col-xs-6 col-sm-3 col-pull-right">
 
-                            <form action="" method="get" class="parent-search m-b">
+                            <!-- <form action="" method="get" class="parent-search m-b">
 
                                 <select name="searchclass" class="niceselect wide">
-                                    <option value="0">choose class</option>
+                                    <option value="0">choose class</option> -->
                                     <?php
                                     // foreach ($classsearch as $stdclass) {
                                     //     echo "<option value='" . $stdclass['class_id'] . "'";
@@ -72,10 +72,10 @@ $startpage  = ($currentpage - 1) * $perpage;
                                     //     echo ">" .  $stdclass['class_name'] . "</option>";
                                     // }
                                     ?>
-                                </select>
+                                <!-- </select>
                                 <button type="submit" class="btn btn-danger"><i class="fa fa-search"></i></button>
 
-                            </form>
+                            </form> -->
                             <div class="clearfix m-b"></div>
 
 

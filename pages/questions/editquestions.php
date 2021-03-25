@@ -6,9 +6,9 @@ include "../../ini.php";  ?>
 
 <?php
 
-if (isset($_GET['courses'])) {
+if (isset($_GET['questions'])) {
 
-    $course = unserialize($_GET['courses']);
+    $question = unserialize($_GET['questions']);
 }
 
 
@@ -53,45 +53,57 @@ if (isset($_GET['courses'])) {
             ?>
                 <div class="panel panel-default panel-custom">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Edit Courses</h3>
+                        <h3 class="panel-title">Edit Question</h3>
                     </div>
                     <div class="panel-body">
                         <form enctype="multipart/form-data" autocomplete="off" class="form-horizontal addvalidate" action="<?php echo $_SERVER['PHP_SELF'] . '?do=update'; ?>" method="post">
-                            <input type="hidden" name="id" value="<?= $course['courses_id'] ?>">
+                            <input type="hidden" name="id" value="<?= $question['questions_id'] ?>">
                             <div class="form-group">
-                                <label for="name" class="col-sm-2 control-label">Courses name</label>
+                                <label for="name" class="col-sm-2 control-label">Question</label>
                                 <div class="col-sm-10">
-                                    <input type="text" name="name" class="form-control" id="name" placeholder="name" value="<?= $course['courses_name'] ?>">
+                                    <input type="text" name="name" class="form-control" id="name" placeholder="Question" value="<?= $question['questions_name'] ?>">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="namear" class="col-sm-2 control-label">Course name arabic</label>
+                                <label for="namear" class="col-sm-2 control-label">Question arabic</label>
                                 <div class="col-sm-10">
-                                    <input type="text" name="namear" class="form-control" id="namear" placeholder="namear" value="<?= $course['courses_name_ar'] ?>">
+                                    <input type="text" name="namear" class="form-control" id="namear" placeholder="Question Arabic" value="<?= $question['questions_name_ar'] ?>">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="desc" class="col-sm-2 control-label">description </label>
+                                <label for="ans" class="col-sm-2 control-label">Answer </label>
                                 <div class="col-sm-10">
-                                    <input type="text" name="desc" class="form-control" id="desc" placeholder="description" value="<?= $course['courses_desc'] ?>">
+                                    <input type="text" name="ans" class="form-control" id="ans" placeholder="Answer" value="<?= $question['questions_answer'] ?>">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="descar" class="col-sm-2 control-label">description arabic</label>
+                                <label for="ansar" class="col-sm-2 control-label">Answer arabic</label>
                                 <div class="col-sm-10">
-                                    <input type="text" name="descar" class="form-control" id="descar" placeholder="description arabic" value="<?= $course['courses_desc_ar'] ?>">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="hour" class="col-sm-2 control-label">hour</label>
-                                <div class="col-sm-10">
-                                    <input type="text" name="hour" class="form-control" id="hour" placeholder="hour" value="<?= $course['courses_hour'] ?>">
+                                    <input type="text" name="ansar" class="form-control" id="ansar" placeholder="Answer arabic" value="<?= $question['questions_answer_ar'] ?>">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="document" class="col-sm-2 control-label">document</label>
                                 <div class="col-sm-10">
-                                    <input type="text" name="document" class="form-control" id="document" placeholder="document" value="<?= $course['courses_document'] ?>">
+                                    <input type="text" name="document" class="form-control" id="document" placeholder="document" value="<?= $question['questions_document'] ?>">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="documentar" class="col-sm-2 control-label">document Arabic</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="documentar" class="form-control" id="documentar" placeholder="document Arabic" value="<?= $question['questions_document_ar'] ?>">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="time" class="col-sm-2 control-label">time</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="time" class="form-control" id="time" placeholder="time" value="<?= $question['questions_time'] ?>">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="timear" class="col-sm-2 control-label">time Arabic</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="timear" class="form-control" id="timear" placeholder="time Arabic" value="<?= $question['questions_time_ar'] ?>">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -99,32 +111,21 @@ if (isset($_GET['courses'])) {
                                 <div class="col-sm-10">
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="common" value="1" <?php if ($course['courses_common'] == "1") echo "checked";  ?>>
+                                            <input type="radio" name="common" value="1" <?php if ($question['questions_common'] == "1")  echo "checked";  ?>>
                                             Yes
                                         </label>
                                     </div>
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="common" value="0" <?php if ($course['courses_common'] == "0") echo "checked";  ?>>
+                                            <input type="radio" name="common" value="0" <?php if ($question['questions_common'] == "0")  echo "checked";  ?>>
                                             No
                                         </label>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="role" class="col-sm-2 control-label">Choose Category</label>
-                                <div class="col-sm-10">
-                                    <select class="niceselect wide" name="category">
-                                        <?php $categories = getAllData("catcourses", "1 = 1  $and ORDER BY catcourses_id ASC")['values'];
-                                        foreach ($categories as $category) { ?>
-                                            <option value="<?= $category['catcourses_id'] ?>" <?php if ($course['courses_type'] == $category['catcourses_id']) echo "selected";  ?>><?= $category['catcourses_name'] ?></option>
-                                        <?php } ?>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
                                 <div class="col-sm-offset-2 col-sm-10">
-                                    <button type="submit" class="btn btn-success btn-sm"> <i class="fa fa-plus"></i> Save Update </button>
+                                    <button type="submit" class="btn btn-success btn-sm"> <i class="fa fa-plus"></i> Save Update</button>
                                 </div>
                             </div>
                         </form>
@@ -158,43 +159,52 @@ if (isset($_GET['courses'])) {
                 if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     //    Start Page Insert 
 
-                    $table = "courses";
+
+
+                    $table = "questions";
 
                     $msgerrors = array();
 
                     $id = superFilter($_POST['id']);
 
-                    $verfiycode = rand(10000, 99999);
-
                     $name = superFilter($_POST['name']);
 
-                    checkLength("course name",  $name, 2, 50);
+                    checkLength("Question name",  $name, 2, 200);
 
                     $namear = $_POST['namear'];
 
-                    checkLength("course name arabic",  $namear, 2, 50);
+                    checkLength("Question  arabic",  $namear, 2, 200);
 
-                    $desc = superFilter($_POST['desc']);
+                    $ans = superFilter($_POST['ans']);
 
-                    checkLength("description ",  $desc, 2, 100);
+                    checkLength("Answer ",  $ans, 2, 255);
 
-                    $descar = superFilter($_POST['descar']);
+                    $ansar = superFilter($_POST['ansar']);
 
-                    checkLength("description  arabic",  $descar, 2, 100);
+                    checkLength("Answer  arabic",  $ansar, 2, 255);
+
 
                     $document = superFilter($_POST['document']);
 
-                    checkLength("document ",  $document, 2, 100);
+                    checkLength("document ",  $document, 2, 200);
 
-                    $hour = superFilter($_POST['hour']);
+                    $documentar = superFilter($_POST['documentar']);
 
-                    checkLength("hour ",  $hour, 1, 50);
+                    checkLength("document Arabic ",  $documentar, 2, 200);
+
+
+                    $time = superFilter($_POST['time']);
+
+                    checkLength("time ",  $time, 1, 100);
+
+                    $timear = superFilter($_POST['timear']);
+
+                    checkLength("time Arabic ",  $timear, 1, 100);
 
                     $common = superFilter($_POST['common']);
 
-                    $category = superFilter($_POST['category']);
+                    $data = getData("questions", "questions_name",  $name);
 
-                    $data = getData("courses", "courses_id",  $id);
 
                     $count = $data['count'];
 
@@ -214,16 +224,17 @@ if (isset($_GET['courses'])) {
                         if (empty($msgerrors)) {
 
                             $values = array(
-                                "courses_name" => $name,
-                                "courses_name_ar" => $namear,
-                                "courses_desc" => $desc,
-                                "courses_desc_ar" => $descar,
-                                "courses_hour" => $hour,
-                                "courses_document" => $document,
-                                "courses_common" => $common,
-                                "courses_type" => $category
+                                "questions_name"        => $name,
+                                "questions_name_ar"     => $namear,
+                                "questions_answer"      => $ans,
+                                "questions_answer_ar"   => $ansar,
+                                "questions_document"     => $document,
+                                "questions_document_ar"  => $documentar,
+                                "questions_time"        => $time,
+                                "questions_time_ar"     => $timear,
+                                "questions_common"      => $common
                             );
-                            $countupdate = updateData($table, $values, "courses_id = '$id' ");
+                            $countupdate = updateData($table, $values, "questions_id = '$id' ");
                             if ($countinsert > 0) {
 
         ?>
@@ -233,10 +244,10 @@ if (isset($_GET['courses'])) {
 
             <?php
 
-                                header("Location:courses.php");
+                                header("Location:questions.php");
                                 exit();
                             } else {
-                                header("Location:courses.php");
+                                header("Location:questions.php");
                                 exit();
                             }
                         } else {

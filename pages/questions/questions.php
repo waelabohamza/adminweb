@@ -106,7 +106,7 @@ $linkdeletepage     = "deletequestions.php";
                                 <td class="hidden-xs "><?php echo $question['questions_name_ar']
                                                         ?></td>
                                 <td>
-                                    <a href="<?= $linkeditpage ?>?questionsid=<?= $question['questions_id'] ?>&courses=<?php echo urlencode(serialize($question)); ?>" class="btn-primary btn-sm mg-h-5 "> 
+                                    <a href="<?= $linkeditpage ?>?questionsid=<?= $question['questions_id'] ?>&questions=<?php echo urlencode(serialize($question)); ?>" class="btn-primary btn-sm mg-h-5 "> 
                                     <i class="fa fa-edit"> </i> <span class="hidden-xs">Edit</span> </a>
                                     <a href="<?= $linkdeletepage ?>?questionsid=<?php echo  $question['questions_id']
                                                                                     ?>" class="btn-danger btn-sm mg-h-5 "><i class="fa fa-remove"> </i> <span class="hidden-xs">Delete</span> </a>

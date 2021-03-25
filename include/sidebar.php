@@ -57,7 +57,7 @@
         <a href="../catcourses/catcourses.php">
             <li>
                 <span>
-                    <i class="fa fa-suitcase fa-lg"> </i>
+                    <i class="fa fa-list-alt fa-lg"> </i>
                 </span>
 
                 Catergories Course
@@ -67,7 +67,7 @@
         <a href="../courses/courses.php">
             <li>
                 <span>
-                    <i class="fa fa-suitcase fa-lg"> </i>
+                    <i class="fa fa-address-book fa-lg"> </i>
                 </span>
 
                 courses
@@ -77,7 +77,7 @@
         <a href="../catexperts/catexperts.php">
             <li>
                 <span>
-                    <i class="fa fa-suitcase fa-lg"> </i>
+                    <i class="fa fa-list-alt fa-lg"> </i>
                 </span>
 
                 categories Experts
@@ -87,7 +87,7 @@
         <a href="../experts/experts.php">
             <li>
                 <span>
-                    <i class="fa fa-suitcase fa-lg"> </i>
+                    <i class="fa fa-address-card-o fa-lg"> </i>
                 </span>
 
                 Experts
@@ -97,7 +97,7 @@
         <a href="../questions/questions.php">
             <li>
                 <span>
-                    <i class="fa fa-suitcase fa-lg"> </i>
+                    <i class="fa fa-question-circle fa-lg"> </i>
                 </span>
 
                 Questions
