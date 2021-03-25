@@ -51,26 +51,16 @@ $titlepage  = "Orders Services View";
 
     </div>
     <!-- Edn Menu-top -->
-
-
     <!-- Start SideBar And Body Page -->
-
     <div class="row">
-
         <!-- Start SideBar  -->
         <div class="col-md-4 col-lg-2 hidden-xs hidden-sm sidebar">
-
             <?php include "../../include/sidebar.php";   ?>
-
         </div>
         <!-- End SideBar  -->
-
         <!-- Start SideBar  -->
         <div class="col-xs-12  col-md-8 col-lg-10">
-
             <!-- start Body =================================== -->
-
-
             <div class="panel panel-default panel-custom manage">
                 <div class="panel-heading">
                     <h3 class="panel-title"><?php echo $titlepage; ?></h3>
@@ -114,7 +104,6 @@ $titlepage  = "Orders Services View";
                     <div class="clearfix"></div>
                     <!-- End pager  -->
                     <table class="table  table-bordered table-hover table-responsive table-section">
-
                         <thead>
                             <tr>
                                 <td>Course</td>
@@ -124,7 +113,6 @@ $titlepage  = "Orders Services View";
                                 <td>control</td>
                             </tr>
                         </thead>
-
                         <?php
                         $orders = getAllData("orderscourseview", "1 = 1  $and ORDER BY orderscourse_id DESC")['values'];
                         foreach ($orders as $order) {
@@ -175,23 +163,10 @@ $titlepage  = "Orders Services View";
                     </table>
                 </div>
             </div>
-
-
             <!-- End Body ======================================= -->
-
         </div>
-
-
-
     </div>
     <!-- End SideBar And Body Page -->
-
-
 </div>
-
-
 <!-- End Body  -->
-
-
-
 <?php include "../../include/footer.php";  ?>
