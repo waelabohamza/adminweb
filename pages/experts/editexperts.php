@@ -58,6 +58,7 @@ if (isset($_GET['experts'])) {
                     <div class="panel-body">
                         <form enctype="multipart/form-data" autocomplete="off" class="form-horizontal addvalidate" action="<?php echo $_SERVER['PHP_SELF'] . '?do=update'; ?>" method="post">
                             <input type="hidden" name="id" value="<?= $experts['experts_id'] ?>">
+                            <input type="hidden" name="fileold" value="<?= $experts['experts_image'] ?>">
                             <div class="form-group">
                                 <label for="name" class="col-sm-2 control-label">name</label>
                                 <div class="col-sm-10">
@@ -168,106 +169,130 @@ if (isset($_GET['experts'])) {
                 if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     //    Start Page Insert 
 
-                    $table = "catcourses";
+
+
+                    $table = "experts";
 
                     $msgerrors = array();
 
+                    $filedir = "experts"  ;
+
+                    $fileold = superFilter($_POST['fileold']);
 
 
-                    if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
-                        $table = "courses";
+                    if (isset($_FILES['file']['name']) && $_FILES['file']['error'] != "4") {
 
-                        $msgerrors = array();
+                        $image      = image_data("file");
 
-                        $id = superFilter($_POST['id']);
+                        $filetmp   =  $image['tmp'];
 
-                        $verfiycode = rand(10000, 99999);
+                        $filename =  rand(0, 1000000) . "_" . $image['name'];
 
-                        $name = superFilter($_POST['name']);
+                    } else {
 
-                        checkLength("course name",  $name, 2, 50);
+                        $filename  =   $fileold;
+                    }
 
-                        $namear = $_POST['namear'];
+                    $id = superFilter($_POST['id']);
 
-                        checkLength("course name arabic",  $namear, 2, 50);
+                    $name = superFilter($_POST['name']);
 
-                        $desc = superFilter($_POST['desc']);
+                    checkLength("Expert name",  $name, 2, 50);
 
-                        checkLength("description ",  $desc, 2, 100);
+                    $namear = superFilter($_POST['namear']);
 
-                        $descar = superFilter($_POST['descar']);
+                    checkLength("Expert name arabic",  $namear, 2, 50);
 
-                        checkLength("description  arabic",  $descar, 2, 100);
+                    $desc = superFilter($_POST['desc']);
 
-                        $document = superFilter($_POST['document']);
+                    checkLength("description ",  $desc, 2, 100);
 
-                        checkLength("document ",  $document, 2, 100);
+                    $descar = superFilter($_POST['descar']);
 
-                        $hour = superFilter($_POST['hour']);
+                    checkLength("description  arabic",  $descar, 2, 100);
 
-                        checkLength("hour ",  $hour, 1, 50);
 
-                        $common = superFilter($_POST['common']);
+                    $spec    = superFilter($_POST['spec']);
 
-                        $category = superFilter($_POST['category']);
+                    checkLength("specialty",  $spec, 10, 120);
 
-                        $data = getData("courses", "courses_id",  $id);
+                    $exp    = superFilter($_POST['exp']);
 
-                        $count = $data['count'];
+                    checkLength("experience",  $exp, 10, 120);
 
-                        if ($count == 0) {
+                    $common =  superFilter($_POST['common']);
+
+                    $category = superFilter($_POST['category']);
+
+
+                    $data = getData("experts", "experts_id",  $id);
+
+                    $count = $data['count'];
+
+                    if ($count == 0) {
 
 ?>
 
-            <div class="alert alert-warning"> Course Not exsist</div>
+        <div class="alert alert-warning"> Expert Not exsist</div>
+
+
+        <?php
+
+                        // echo json_encode(array("status" => "faild", "cause" => "email Or phone already existst", "key" => "found"));
+
+                    } else {
+
+                        if (empty($msgerrors)) {
+
+                            $values = array(
+                                "experts_name"          => $name,
+                                "experts_name_ar"       => $namear,
+                                "experts_image"         => $filename,
+                                "experts_desc"          => $desc,
+                                "experts_desc_ar"       => $descar,
+                                "experts_experience"    => $exp,
+                                "experts_common"        => $common,
+                                "experts_spec"          => $spec,
+                                "experts_cat"           => $category
+                            );
+                            $countupdate = updateData($table, $values, "experts_id = '$id' ");
+
+                            if (isset($_FILES['file']['name']) && $_FILES['file']['error'] != "4") {
+                                if (file_exists("../../api/upload/" . $filedir . "/" . $fileold)) {
+                                    unlink("../../api/upload/" . $filedir . "/" . $fileold);
+                                }
+                                move_uploaded_file($filetmp, "../../api/upload/" . $filedir . "/" . $filename);
+                            }
+                            
+                            if ($countinsert > 0) {
+
+                            
+
+        ?>
+                <div class="alert alert-success"> Edit Expert info  Success </div>
+
 
 
             <?php
 
-                            // echo json_encode(array("status" => "faild", "cause" => "email Or phone already existst", "key" => "found"));
-
+                                header("Location:experts.php");
+                                exit();
+                            } else {
+                                header("Location:experts.php");
+                                exit();
+                            }
                         } else {
 
-                            if (empty($msgerrors)) {
-
-                                $values = array(
-                                    "courses_name" => $name,
-                                    "courses_name_ar" => $namear,
-                                    "courses_desc" => $desc,
-                                    "courses_desc_ar" => $descar,
-                                    "courses_hour" => $hour,
-                                    "courses_document" => $document,
-                                    "courses_common" => $common,
-                                    "courses_type" => $category
-                                );
-                                $countupdate = updateData($table, $values, "courses_id = '$id' ");
-                                if ($countinsert > 0) {
-
+                            foreach ($msgerrors as $errors) {
             ?>
-                    <div class="alert alert-success"> Edit Course Success </div>
-
-
-
-                <?php
-
-                                    header("Location:courses.php");
-                                    exit();
-                                } else {
-                                    header("Location:courses.php");
-                                    exit();
-                                }
-                            } else {
-
-                                foreach ($msgerrors as $errors) {
-                ?>
-                    <div class="mg-15  alert alert-warning"><?php echo $errors;  ?></div>
+                <div class="mg-15  alert alert-warning"><?php echo $errors;  ?></div>
 <?php
-                                }
-                                // echo json_encode(array("status" => "faild", "cause" => $msgerrors, "key" => "insert"));
                             }
+                            // echo json_encode(array("status" => "faild", "cause" => $msgerrors, "key" => "insert"));
                         }
                     }
+
                     //    End Page Insert
                 } else {
                     echo "reuest Not post";

@@ -162,8 +162,7 @@ include "../../ini.php";  ?>
 
                     $msgerrors = array();
 
-
-                    $verfiycode = rand(10000, 99999);
+ 
 
 
 
