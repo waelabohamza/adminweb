@@ -12,19 +12,12 @@ $titleaddpage       = "Add Service";
 $linkeditpage       = "editservices.php";
 $linkdeletepage     = "deleteservices.php";
 
-
-
-
 $currentpage = isset($_GET['pager']) && is_numeric($_GET['pager']) ? intval($_GET['pager'])  : 1;
 $countdrug  = countCoulmn("services_id", "services");
 $nextpage   = $currentpage + 1;
 $prevpage   = $currentpage - 1;
 $lastpage   = ceil($countdrug / $perpage);
 $startpage  = ($currentpage - 1) * $perpage;
-
-
-
-
 ?>
 
 
