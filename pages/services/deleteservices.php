@@ -1,5 +1,6 @@
 <?php
 ob_start() ; 
+
 include "../../ini.php";  ?>
 <?php include "../../include/header.php"; ?>
 <?php include "../../include/navmobile.php";   ?>
