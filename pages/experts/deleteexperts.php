@@ -1,23 +1,30 @@
 <?php
-ob_start() ; 
+ob_start();
 include "../../ini.php";  ?>
 <?php include "../../include/header.php"; ?>
 <?php include "../../include/navmobile.php";   ?>
 
-<?php 
+<?php
 
- 
- 
-   $id = $_GET['expertsid'] ; 
-   $count =  deleteData("experts" , "experts_id" , $id);
-   if ($count > 0 ) {
-              header("Location:experts.php") ; 
-              exit() ; 
-   }else {
-    $errors =  "Faild Add Category please try again" ; 
-   }
-   
- 
+
+
+$id = $_GET['expertsid'];
+$filedir = "experts";
+$fileold = $_GET['imagename'];
+
+$count =  deleteData("experts", "experts_id", $id);
+if ($count > 0) {
+
+    if (file_exists("../../api/upload/" . $filedir . "/" . $fileold)) {
+        unlink("../../api/upload/" . $filedir . "/" . $fileold);
+    }
+    header("Location:experts.php");
+    exit();
+} else {
+    $errors =  "Faild Add Category please try again";
+}
+
+
 
 ?>
 
@@ -70,7 +77,7 @@ include "../../ini.php";  ?>
 
 
 
-<?php include "../../include/footer.php"; 
-ob_flush() ; 
+<?php include "../../include/footer.php";
+ob_flush();
 
 ?>

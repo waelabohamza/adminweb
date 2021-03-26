@@ -9,8 +9,14 @@ include "../../ini.php";  ?>
  
  
    $id = $_GET['servicesid'] ; 
+   $filedir = "pdfviewservices";
+   $fileold = $_GET['filename'];
+
    $count =  deleteData("services" , "services_id" , $id);
    if ($count > 0 ) {
+                if (file_exists("../../api/upload/" . $filedir . "/" . $fileold)){
+                    unlink("../../api/upload/" . $filedir . "/" . $fileold);
+                }
               header("Location:services.php") ; 
               exit() ; 
    }else {

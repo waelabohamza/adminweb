@@ -146,7 +146,7 @@ $startpage  = ($currentpage - 1) * $perpage;
                                 <td>
                                     <a href="<?= $linkeditpage ?>?servicesid=<?= $service['services_id'] ?>&service=<?php echo urlencode(serialize($service)); ?>" class="btn-primary btn-sm mg-h-5 "> <i class="fa fa-edit"> </i> <span class="hidden-xs">Edit</span> </a>
                                     <a href="<?= $linkdeletepage ?>?servicesid=<?php echo  $service['services_id']
-                                                                                ?>" class="btn-danger btn-sm mg-h-5 "><i class="fa fa-remove"> </i> <span class="hidden-xs">Delete</span> </a>
+                                                                                ?>&filename=<?= $service['services_desc'] ; ?>" class="btn-danger btn-sm mg-h-5 "><i class="fa fa-remove"> </i> <span class="hidden-xs">Delete</span> </a>
                                 </td>
                             </tr>
                         <?php

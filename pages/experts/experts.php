@@ -109,7 +109,7 @@ $linkdeletepage     = "deleteexperts.php";
                                 <td>
                                     <a href="<?= $linkeditpage ?>?expertsid=<?= $expert['experts_id'] ?>&experts=<?php echo urlencode(serialize($expert)); ?>" class="btn-primary btn-sm mg-h-5 "> <i class="fa fa-edit"> </i> <span class="hidden-xs">Edit</span> </a>
                                     <a href="<?= $linkdeletepage ?>?expertsid=<?php echo  $expert['experts_id']
-                                                                                    ?>" class="btn-danger btn-sm mg-h-5 "><i class="fa fa-remove"> </i> <span class="hidden-xs">Delete</span> </a>
+                                                                                    ?>&imagename=<?=  $expert['experts_image'] ;  ?>" class="btn-danger btn-sm mg-h-5 "><i class="fa fa-remove"> </i> <span class="hidden-xs">Delete</span> </a>
                                 </td>
                             </tr>
                         <?php
