@@ -215,11 +215,11 @@ if (isset($_GET['experts'])) {
 
                     $spec    = superFilter($_POST['spec']);
 
-                    checkLength("specialty",  $spec, 10, 120);
+                    checkLength("specialty",  $spec, 2, 120);
 
                     $exp    = superFilter($_POST['exp']);
 
-                    checkLength("experience",  $exp, 10, 120);
+                    checkLength("experience",  $exp, 2, 120);
 
                     $common =  superFilter($_POST['common']);
 

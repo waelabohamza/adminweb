@@ -195,18 +195,18 @@ include "../../ini.php";  ?>
 
                     $spec    = superFilter($_POST['spec']);
 
-                    checkLength("specialty",  $spec, 10, 120);
+                    checkLength("specialty",  $spec, 3, 120);
 
                     $exp    = superFilter($_POST['exp']);
 
-                    checkLength("experience",  $exp, 10, 120);
+                    checkLength("experience",  $exp, 3, 120);
 
                     $common =  superFilter($_POST['common']);
 
                     $category = superFilter($_POST['category']);
 
 
-                    $data = getData("courses", "courses_name",  $name);
+                    $data = getData("experts", "experts_name",  $name);
 
                     $count = $data['count'];
 
