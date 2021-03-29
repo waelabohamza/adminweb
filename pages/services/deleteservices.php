@@ -78,6 +78,6 @@ include "../../ini.php";  ?>
 
 
 <?php include "../../include/footer.php"; 
-ob_flush() ; 
+ob_end_flush() ; 
 
 ?>

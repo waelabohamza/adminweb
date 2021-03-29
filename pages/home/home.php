@@ -1,4 +1,15 @@
-<?php include "../../ini.php";  ?>
+<?php 
+ob_start() ; 
+session_start() ; 
+
+if (!isset($_SESSION['email'])) {
+    header("Location:../../index.php") ; 
+    exit() ; 
+}
+
+include "../../ini.php";  
+
+?>
 <?php include "../../include/header.php"; ?>
 <?php include "../../include/navmobile.php";   ?>
 
@@ -121,4 +132,7 @@
 
 
 
-<?php include "../../include/footer.php";  ?>
+<?php
+ include "../../include/footer.php";  
+ ob_end_flush() ; 
+ ?>

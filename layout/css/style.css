@@ -74,6 +74,48 @@ a {
 }
 
 
+/* Login */
+
+
+/* start login */
+
+.login {
+    width: 400px;
+    margin: 150px auto 20px auto;
+    padding: 30px 30px 10px 30px;
+    padding-top: 0px;
+    background: #fff;
+    border-radius: 4px
+}
+
+.login input {
+    margin-bottom: 20px;
+}
+
+.login input[type='submit'] {
+    background: #09A3A3;
+    border: 1px solid #09A3A3;
+}
+
+.login input:last {
+    margin-bottom: 0px
+}
+
+.login h1 {
+    border-radius: 4px 4px 0px 0px;
+    font-size: 30px;
+    color: #888;
+    background: #1A2229;
+    color: #fff;
+    margin-top: 0px;
+    margin-bottom: 20px;
+    padding: 20px 10px;
+    margin-right: -30px;
+    margin-left: -30px;
+    text-transform: capitalize;
+}
+
+
 /* ==================================== */
 
 

@@ -124,7 +124,7 @@
 
             </li>
         </a>
-        <a href="">
+        <a href="../../logout.php">
             
             <li>
 
