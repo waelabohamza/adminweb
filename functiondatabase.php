@@ -357,12 +357,12 @@ function image_upload_multiple($imagemultipe, $cat, $table,  $filedir)
 
 
 function checksignin() {
-    ob_start() ; 
-    session_start() ; 
-    if (!isset($_SESSION['email'])){
-           header("Location:../../index.php") ;
-           exit()  ; 
-    }
+    // ob_start() ; 
+    // session_start() ; 
+    // if (!isset($_SESSION['email'])){
+    //        header("Location:../../index.php") ;
+    //        exit()  ; 
+    // }
 }
 
 
