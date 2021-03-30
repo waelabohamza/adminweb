@@ -156,7 +156,7 @@ if (isset($_GET['service'])) {
                                     <select class="niceselect wide" name="category">
                                         <?php $categories = getAllData("categories", "1 = 1  $and ORDER BY categories_id DESC")['values'];
                                         foreach ($categories as $category) { ?>
-                                            <option value="<?= $category['categories_id'] ?>" <?php if ($service['services_categories'])  echo "selected" ;  ; ?>><?= $category['categories_name'] ?></option>
+                                            <option value="<?= $category['categories_id'] ?>" <?php if ($service['services_categories'])  echo "selected";; ?>><?= $category['categories_name'] ?></option>
                                         <?php } ?>
                                     </select>
                                 </div>
@@ -197,16 +197,16 @@ if (isset($_GET['service'])) {
 
                 if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     //    Start Page Insert 
-                         
-                    echo "<pre>" ; 
+
+                    echo "<pre>";
                     print_r($_FILES);
-                    echo "</pre>" ; 
+                    echo "</pre>";
 
 
-                    $filedir = "pdfviewservices"  ;
-                    
-                     
-                   
+                    $filedir = "pdfviewservices";
+
+
+
                     $table = "services";
 
                     $msgerrors = array();
@@ -214,7 +214,7 @@ if (isset($_GET['service'])) {
 
                     $verfiycode = rand(10000, 99999);
 
-                    $fileold = superFilter($_POST['fileold']) ;  
+                    $fileold = superFilter($_POST['fileold']);
 
 
 
@@ -225,16 +225,14 @@ if (isset($_GET['service'])) {
                         $filetmp   =  $image['tmp'];
 
                         $filename =  rand(0, 1000000) . "_" . $image['name'];
-
                     } else {
 
-                        $filename  =   $fileold  ; 
-
+                        $filename  =   $fileold;
                     }
 
                     $id = superFilter($_POST['id']);
 
-                    $fees  = superFilter($_POST['fees']) ; 
+                    $fees  = superFilter($_POST['fees']);
 
                     $name = superFilter($_POST['name']);
 
@@ -304,9 +302,9 @@ if (isset($_GET['service'])) {
                                 "services_fees"         => $fees
                                 // "services_typeprice"    => $price
                             );
-                             
+
                             if (isset($_FILES['file']['name']) && $_FILES['file']['error'] != "4") {
-                                if (file_exists("../../api/upload/" . $filedir . "/" . $fileold)){
+                                if (file_exists("../../api/upload/" . $filedir . "/" . $fileold)) {
                                     unlink("../../api/upload/" . $filedir . "/" . $fileold);
                                 }
                                 move_uploaded_file($filetmp, "../../api/upload/" . $filedir . "/" . $filename);
