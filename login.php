@@ -57,7 +57,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         background: #eee
     }
 </style>
+
 <div class="login">
+
 <h1 class="text-center">  Admin  </h1>
 <form  action="<?php  echo $_SERVER['PHP_SELF']  ?> " method="post">
   <input type ="text"     class="form-control "

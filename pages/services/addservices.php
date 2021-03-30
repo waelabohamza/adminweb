@@ -94,7 +94,12 @@ include "../../ini.php";  ?>
                                     <input type="text" name="documentar" class="form-control" id="documentar" placeholder="document arabic">
                                 </div>
                             </div>
-
+                            <div class="form-group">
+                                <label for="fees" class="col-sm-2 control-label">fees</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="fees" class="form-control" id="fees" placeholder="fees">
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <label for="descar" class="col-sm-2 control-label">Common</label>
                                 <div class="col-sm-10">
@@ -221,6 +226,8 @@ include "../../ini.php";  ?>
 
                     $name = superFilter($_POST['name']);
 
+                    $fees = superFilter($_POST['fees']);
+
                     checkLength("service name",  $name, 2, 50);
 
                     $namear = superFilter($_POST['namear']);
@@ -270,7 +277,8 @@ include "../../ini.php";  ?>
                             "services_common"       => $common,
                             "services_favorite"     => $favorite,
                             "services_categories"   => $categories,
-                            "services_typeprice"    => $price
+                            "services_typeprice"    => $price  , 
+                            "services_fees"         => $fees
                         );
                         $countinsert  = insertData($table, $values);
                         if ($countinsert > 0) {

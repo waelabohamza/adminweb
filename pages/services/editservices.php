@@ -110,7 +110,12 @@ if (isset($_GET['service'])) {
                                     <input type="text" name="documentar" class="form-control" id="documentar" placeholder="document arabic" value="<?= $service['services_document_ar'] ?>">
                                 </div>
                             </div>
-
+                            <div class="form-group">
+                                <label for="fees" class="col-sm-2 control-label">fees</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="fees" class="form-control" id="fees" placeholder="fees" value="<?= $service['services_fees'] ?>">
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <label for="descar" class="col-sm-2 control-label">Common</label>
                                 <div class="col-sm-10">
@@ -229,6 +234,8 @@ if (isset($_GET['service'])) {
 
                     $id = superFilter($_POST['id']);
 
+                    $fees  = superFilter($_POST['fees']) ; 
+
                     $name = superFilter($_POST['name']);
 
                     checkLength("service name",  $name, 2, 50);
@@ -294,6 +301,7 @@ if (isset($_GET['service'])) {
                                 "services_common"       => $common,
                                 "services_favorite"     => $favorite,
                                 "services_categories"   => $categories,
+                                "services_fees"         => $fees
                                 // "services_typeprice"    => $price
                             );
                              
