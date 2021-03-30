@@ -8,6 +8,6 @@ define("PATH_IMG" , "layout/images/") 		;
 define("PATH_JS"  , "layout/js/") 		; 
 
 
-$perpage = 2;
+$perpage = 20;
 
 ?>
