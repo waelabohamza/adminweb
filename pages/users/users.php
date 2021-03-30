@@ -4,7 +4,7 @@
 
 
 <?php
-checksignin() ; 
+ ; 
 
 $currentpage = isset($_GET['pager']) && is_numeric($_GET['pager']) ? intval($_GET['pager'])  : 1;
 $countdrug  = countCoulmn("users_id", "users");

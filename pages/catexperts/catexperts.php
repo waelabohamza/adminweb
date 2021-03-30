@@ -5,7 +5,7 @@
 <?php
 
 // Var Global For Every Page 
-checksignin() ; 
+ ; 
 
 $titlepage          = "categories Experts";
 $linkaddpage        = "addcatexperts.php";

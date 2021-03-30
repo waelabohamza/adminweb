@@ -2,7 +2,7 @@
 
 
 include "../../ini.php";
-checksignin() ; 
+ ; 
 
 ?>
 <?php include "../../include/header.php"; ?>

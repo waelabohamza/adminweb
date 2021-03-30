@@ -1,7 +1,7 @@
 <?php
  
 include "../../ini.php";
-checksignin() ; 
+ ; 
 $sql = " SELECT 
 
 (select COUNT(*) from users ) as users    , 
