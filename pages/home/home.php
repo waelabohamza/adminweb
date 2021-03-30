@@ -1,16 +1,7 @@
 <?php
-ob_start();
-session_start();
-
-if (!isset($_SESSION['email'])) {
-    header("Location:../../index.php");
-    exit();
-}
-
+ 
 include "../../ini.php";
-
-
-
+checksignin() ; 
 $sql = " SELECT 
 
 (select COUNT(*) from users ) as users    , 

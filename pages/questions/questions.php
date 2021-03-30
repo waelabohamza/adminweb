@@ -1,4 +1,10 @@
-<?php include "../../ini.php";  ?>
+<?php 
+
+
+include "../../ini.php";
+checksignin() ; 
+
+?>
 <?php include "../../include/header.php"; ?>
 <?php include "../../include/navmobile.php";   ?>
 

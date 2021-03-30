@@ -5,6 +5,7 @@
 <?php
 
 // Var Global For Every Page 
+checksignin() ; 
 
 $titlepage          = "categories Course";
 $linkaddpage        = "addcatcourses.php";
