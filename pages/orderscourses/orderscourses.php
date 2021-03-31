@@ -3,9 +3,9 @@
 <?php include "../../include/navmobile.php";   ?>
 
 <?php
- ; 
+ 
 
-
+ $linkviewpage  = "view.php" ; 
 $linkdeniedpage = "deniedorders.php";
 $linkdeletepage = "deleteorders.php";
 $linkapprovepage = "approvedorders.php";
@@ -144,8 +144,8 @@ $titlepage  = "Orders Services View";
                                                         }
                                                         ?></td>
                                 <td>
-                                    <a href="<?= $linkdeletepage ?>?ordersid=<?php echo  $order['orderscourse_id']
-                                                                                ?>" class="btn-primary btn-sm mg-h-5 "><i class="fa fa-info-circle"> </i> <span class="hidden-xs">View</span> </a>
+                                    <a href="<?= $linkviewpage ?>?ordersid=<?php echo  $order['orderscourse_id']
+                                                                                ?>&details=<?php echo urlencode(serialize($order)); ?>" class="btn-primary btn-sm mg-h-5 "><i class="fa fa-info-circle"> </i> <span class="hidden-xs">View</span> </a>
 
                                     <?php if ($order['orderscourse_status'] == "0") { ?>
 

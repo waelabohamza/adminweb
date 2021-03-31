@@ -1,5 +1,6 @@
 <?php 
 session_start() ; 
+$login = "yes" ; 
 include "ini.php" ;  
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {

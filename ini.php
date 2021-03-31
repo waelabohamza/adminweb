@@ -11,6 +11,13 @@ define("PATH_JS"  , "layout/js/") 		;
 $perpage = 20;
 
 
-
+if (!isset($login)){
+    ob_start() ; 
+    session_start() ;
+     if (!isset($_SESSION['email']) ) {
+        header("location:../../index.php") ;
+        exit() ;   
+     }
+}
 
 ?>

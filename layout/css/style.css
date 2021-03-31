@@ -197,6 +197,31 @@ thead {
 }
 
 
+/* View Page */
+
+.panel-view {
+    margin-top: 20px
+}
+
+.panel-view .panel-heading {
+    background: #3498db
+}
+
+.panel-view .panel-heading img {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+}
+
+.panel-view .ul-view li {
+    padding: 5px;
+    color: #777;
+    font-family: "time new roman";
+    letter-spacing: 1px;
+    text-transform: capitalize;
+}
+
+
 /* start form search and choose class */
 
 .parent-search {
