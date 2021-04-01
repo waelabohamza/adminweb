@@ -77,10 +77,19 @@ if (isset($_GET['details'])) {
             <!-- Large modal -->
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#imageidentity">Image identity</button>
              <?php if ($view['ordersservice_licence'] != "0") {    ?>
-            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#imagelicence">Image licence</button>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#imagelicence">Image licence</button>
             <?php } if ($view['ordersservice_filecustom'] != "0") {   ?>
-            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#imageaddtional">Image File Addtional</button>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#imageaddtional">Image File Addtional</button>
             <?php  } ?>
+
+                                        <a href="approvedorders.php?ordersid=<?php echo  $view['ordersservice_id']
+                                                                                    ?>" class="btn-success btn mg-h-5 "><i class="fa  fa-check"> </i> <span class="hidden-xs">Approve</span> </a>
+                                        <a href="deniedorders.php?ordersid=<?php echo  $view['ordersservice_id']
+                                                                                    ?>" class="btn-warning  btn mg-h-5 "><i class="fa fa-remove"> </i> <span class="hidden-xs">Deny</span> </a>
+
+         
+
+
             <div class="modal fade" tabindex="-1" id="imageidentity" role="dialog" aria-labelledby="myLargeModalLabel">
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
