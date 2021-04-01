@@ -15,6 +15,11 @@ $data = getAllData("ordersserviceview", "users_id = '$userid'  $and  ORDER BY or
 if ($data['count'] > 0) {
 
     $arraydatahome['ordersservice'] = $data['values'];
+
+}else {
+    
+    $arraydatahome['ordersservice'] = "0" ;
+
 }
 
 $data = getAllData("orderscourseview", "users_id = '$userid'  $and  ORDER BY orderscourse_id DESC  $limit ");
@@ -23,6 +28,8 @@ $data = getAllData("orderscourseview", "users_id = '$userid'  $and  ORDER BY ord
 if ($data['count'] > 0) {
 
     $arraydatahome['orderscourse'] = $data['values'];
+}else {
+    $arraydatahome['orderscourse'] = "0" ; 
 }
 
 
