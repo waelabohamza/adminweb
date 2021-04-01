@@ -75,11 +75,11 @@ if (isset($_GET['details'])) {
             </div>
             <!-- Button trigger modal -->
             <!-- Large modal -->
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#imageidentity">Image identity</button>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#imageidentity">identity</button>
              <?php if ($view['ordersservice_licence'] != "0") {    ?>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#imagelicence">Image licence</button>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#imagelicence">licence</button>
             <?php } if ($view['ordersservice_filecustom'] != "0") {   ?>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#imageaddtional">Image File Addtional</button>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#imageaddtional">File Addtional</button>
             <?php  } ?>
 
                                         <a href="approvedorders.php?ordersid=<?php echo  $view['ordersservice_id']
