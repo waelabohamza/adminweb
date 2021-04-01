@@ -326,6 +326,14 @@ thead {
 }
 
 
+/* Image Alert */
+
+.imagealert img {
+    max-height: 500px !important;
+    object-fit: fill;
+}
+
+
 /* ==================================== */
 
 

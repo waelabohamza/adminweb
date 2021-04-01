@@ -3,8 +3,8 @@
 <?php include "../../include/navmobile.php";   ?>
 
 <?php
- ; 
-
+ 
+$linkviewpage = "view.php" ; 
 $linkdeniedpage = "deniedorders.php";
 $linkdeletepage = "deleteorders.php";
 $linkapprovepage = "approvedorders.php";
@@ -155,8 +155,8 @@ $titlepage  = "Orders Services View";
                                                         }
                                                         ?></td>
                                 <td>
-                                    <a href="<?= $linkdeletepage ?>?ordersid=<?php echo  $order['ordersservice_id']
-                                                                                ?>" class="btn-primary btn-sm mg-h-5 "><i class="fa fa-info-circle"> </i> <span class="hidden-xs">View</span> </a>
+                                    <a href="<?= $linkviewpage ?>?ordersid=<?php echo  $order['ordersservice_id']
+                                                                                ?>&details=<?php echo urlencode(serialize($order)); ?>" class="btn-primary btn-sm mg-h-5 "><i class="fa fa-info-circle"> </i> <span class="hidden-xs">View</span> </a>
 
                                     <?php if ($order['ordersservice_status'] == "0") { ?>
 
@@ -167,7 +167,7 @@ $titlepage  = "Orders Services View";
                                     <?php   } ?>
 
                                     <a href="<?= $linkdeletepage ?>?ordersid=<?php echo  $order['ordersservice_id']
-                                                                                ?>" class="btn-danger btn-sm mg-h-5 "><i class="fa fa-trash-o"> </i> <span class="hidden-xs">Delete</span> </a>
+                                                                                ?>&details=<?php echo urlencode(serialize($order)); ?>" class="btn-danger btn-sm mg-h-5 "><i class="fa fa-trash-o"> </i> <span class="hidden-xs">Delete</span> </a>
                                 </td>
                             </tr>
                         <?php

@@ -49,8 +49,18 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
         $imagenametwo =  rand(0, 1000000) . "_" . $imagetwo['name'];
     } else {
-
         $imagenametwo    = "0";
+    }
+    if (isset($_FILES['filethree']['name'])) {
+
+        $imagethree      = image_data("filethree");
+
+        $filetmpthree  =  $imagethree['tmp'];
+
+        $imagenamethree =  rand(0, 1000000) . "_" . $imagethree['name'];
+    } else {
+
+        $imagenamethree    = "0";
     }
     // End Image Request 
     $values = array(
@@ -62,6 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         "ordersservice_fees"        => $fees,
         "ordersservice_licence"     => $imagenametwo,
         "ordersservice_identity"    => $imagename,
+        "ordersservice_filecustom"  => $imagenamethree,
         "ordersservice_serviceid"   => $serviceid,
         "ordersservice_userid"      => $userid
 
@@ -71,6 +82,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         move_uploaded_file($filetmp, "../upload/" . $filedir . "/" . $imagename);
         if (isset($_FILES['filetwo']['name'])) {
             move_uploaded_file($filetmptwo, "../upload/" . $filedir . "/" . $imagenametwo);
+        }
+        if (isset($_FILES['filethree']['name'])) {
+            move_uploaded_file($filetmpthree, "../upload/" . $filedir . "/" . $imagenamethree);
         }
         countresault($countinsert);
     } else {

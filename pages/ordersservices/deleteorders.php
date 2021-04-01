@@ -10,12 +10,15 @@ include "../../ini.php";  ?>
  
    $id = $_GET['ordersid'] ; 
 
+   $details = unserialize($_GET['details']);
+
    $count =  deleteData("ordersservice" , "ordersservice_id" , $id);
 
    if ($count > 0 ) {
-
+              deleteFileOrders("ordersservice" ,$details['ordersservice_identity']) ; 
+              deleteFileOrders("ordersservice" ,$details['ordersservice_licence']) ; 
+              deleteFileOrders("ordersservice" ,$details['ordersservice_filecustom']) ; 
               header("Location:ordersservices.php") ; 
-
               exit() ; 
 
    }else {

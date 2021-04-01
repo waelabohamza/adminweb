@@ -177,6 +177,14 @@ function deleteFile($filedir, $imageold)
     }
 }
 
+function deleteFileOrders($filedir, $imageold)
+{
+
+    if (file_exists("../../api/upload/" . $filedir . "/" . $imageold)) {
+        unlink("../../api/upload/" . $filedir . "/" . $imageold);
+    }
+}
+
 // ==========================
 //  count faild or success
 // ==========================
